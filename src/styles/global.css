@@ -16,9 +16,9 @@
 
   body {
     @apply text-accent-blue font-sans antialiased;
-    background: linear-gradient(180deg, #4a6a8a 0%, #6789a8 50%, #c5d4e3 100%) no-repeat;
+    background: linear-gradient(180deg, #5a7a9c 0%, #c0d2e2 100%) no-repeat;
     background-attachment: fixed;
-    background-color: #4a6a8a;
+    background-color: #5a7a9c;
     font-feature-settings: 'ss01', 'cv11';
   }
 

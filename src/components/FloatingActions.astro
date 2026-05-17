@@ -6,21 +6,21 @@ const waMsg = encodeURIComponent('Hallo, ich interessiere mich für eine Reinigu
 <div class="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-3 print:hidden">
   <a
     href={`tel:${site.phoneE164}`}
-    class="group inline-flex h-12 items-center gap-2.5 rounded-full bg-ink-900/95 px-4 ring-1 ring-white/10 shadow-2xl backdrop-blur transition hover:bg-ink-800 hover:-translate-y-0.5"
+    class="group inline-flex h-12 items-center gap-2.5 rounded-full bg-white px-4 ring-1 ring-slate-border shadow-card backdrop-blur transition hover:bg-surface hover:-translate-y-0.5"
     aria-label="Jetzt anrufen"
     data-track="floating-phone"
   >
     <span class="flex h-7 w-7 items-center justify-center rounded-full bg-emerald">
       <svg class="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a1 1 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
     </span>
-    <span class="text-xs font-semibold text-white pr-1 hidden sm:inline">{site.phone}</span>
+    <span class="text-xs font-semibold text-ink-950 pr-1 hidden sm:inline">{site.phone}</span>
   </a>
 
   <a
     href={`https://wa.me/${site.whatsappE164.replace('+', '')}?text=${waMsg}`}
     target="_blank"
     rel="noopener"
-    class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-2xl shadow-[#25D366]/30 ring-2 ring-white/10 transition hover:-translate-y-0.5"
+    class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-card ring-2 ring-white transition hover:-translate-y-0.5"
     aria-label="WhatsApp Chat starten"
     id="floating-wa"
   >

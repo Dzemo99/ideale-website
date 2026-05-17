@@ -3,7 +3,7 @@
 
 <div
   id="cookie-banner"
-  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-white/10 bg-ink-900/95 backdrop-blur-xl shadow-2xl"
+  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-slate-border bg-white/95 backdrop-blur-md shadow-card"
   role="dialog"
   aria-labelledby="cookie-title"
   aria-describedby="cookie-desc"
@@ -11,13 +11,13 @@
   <div class="container-x py-5 sm:py-6">
     <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <div class="flex-1 max-w-3xl">
-        <h2 id="cookie-title" class="text-base font-semibold text-white">
+        <h2 id="cookie-title" class="text-base font-semibold text-ink-950">
           Wir respektieren Ihre Privatsphäre
         </h2>
-        <p id="cookie-desc" class="mt-1.5 text-sm text-white/60 leading-relaxed">
+        <p id="cookie-desc" class="mt-1.5 text-sm text-slate-text leading-relaxed">
           Wir verwenden Cookies und ähnliche Technologien, um unsere Website zu betreiben, Ihr Erlebnis zu verbessern und unsere Marketingaktivitäten zu analysieren.
           Sie können einzelne Kategorien zustimmen oder ablehnen. Mehr Infos in unserer
-          <a href="/datenschutz" class="underline hover:text-emerald">Datenschutzerklärung</a>.
+          <a href="/datenschutz" class="text-emerald hover:underline font-medium">Datenschutzerklärung</a>.
         </p>
       </div>
       <div class="flex flex-col sm:flex-row gap-2.5 lg:flex-shrink-0">
@@ -35,32 +35,32 @@
   </div>
 </div>
 
-<div id="cookie-modal" class="fixed inset-0 z-[60] hidden bg-black/70 backdrop-blur-sm" role="dialog" aria-modal="true">
+<div id="cookie-modal" class="fixed inset-0 z-[60] hidden bg-ink-950/50 backdrop-blur-sm" role="dialog" aria-modal="true">
   <div class="flex min-h-full items-center justify-center p-4">
-    <div class="w-full max-w-lg rounded-2xl bg-ink-900 ring-1 ring-white/10 shadow-2xl">
+    <div class="w-full max-w-lg rounded-2xl bg-white ring-1 ring-slate-border shadow-card">
       <div class="p-6">
-        <h2 class="text-lg font-semibold text-white">Cookie-Einstellungen</h2>
-        <p class="mt-2 text-sm text-white/60">Wählen Sie aus, welche Kategorien Sie zulassen möchten.</p>
+        <h2 class="text-lg font-semibold text-ink-950">Cookie-Einstellungen</h2>
+        <p class="mt-2 text-sm text-slate-text">Wählen Sie aus, welche Kategorien Sie zulassen möchten.</p>
         <div class="mt-5 space-y-3">
-          <label class="flex items-start gap-3 rounded-xl bg-white/5 p-4 ring-1 ring-white/5">
+          <label class="flex items-start gap-3 rounded-xl bg-surface p-4 ring-1 ring-slate-border">
             <input type="checkbox" checked disabled class="mt-1 h-4 w-4 rounded accent-emerald" />
             <div>
-              <span class="block text-sm font-medium text-white">Notwendig</span>
-              <span class="block text-xs text-white/50">Für den Betrieb der Website erforderlich.</span>
+              <span class="block text-sm font-medium text-ink-950">Notwendig</span>
+              <span class="block text-xs text-slate-mute">Für den Betrieb der Website erforderlich.</span>
             </div>
           </label>
-          <label class="flex items-start gap-3 rounded-xl bg-white/5 p-4 ring-1 ring-white/5">
+          <label class="flex items-start gap-3 rounded-xl bg-surface p-4 ring-1 ring-slate-border">
             <input type="checkbox" id="consent-analytics" class="mt-1 h-4 w-4 rounded accent-emerald" />
             <div>
-              <span class="block text-sm font-medium text-white">Statistik</span>
-              <span class="block text-xs text-white/50">Anonyme Auswertung der Nutzung (Google Analytics).</span>
+              <span class="block text-sm font-medium text-ink-950">Statistik</span>
+              <span class="block text-xs text-slate-mute">Anonyme Auswertung der Nutzung (Google Analytics).</span>
             </div>
           </label>
-          <label class="flex items-start gap-3 rounded-xl bg-white/5 p-4 ring-1 ring-white/5">
+          <label class="flex items-start gap-3 rounded-xl bg-surface p-4 ring-1 ring-slate-border">
             <input type="checkbox" id="consent-marketing" class="mt-1 h-4 w-4 rounded accent-emerald" />
             <div>
-              <span class="block text-sm font-medium text-white">Marketing</span>
-              <span class="block text-xs text-white/50">Google Ads-Tracking und Remarketing.</span>
+              <span class="block text-sm font-medium text-ink-950">Marketing</span>
+              <span class="block text-xs text-slate-mute">Google Ads-Tracking und Remarketing.</span>
             </div>
           </label>
         </div>

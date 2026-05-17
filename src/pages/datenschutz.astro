@@ -4,25 +4,25 @@ import { site } from '../data/site';
 ---
 
 <BaseLayout title={`Datenschutz – ${site.name}`} description="Datenschutzerklärung gemäß DSGVO." noindex>
-  <section class="bg-ink-950 py-20 lg:py-24">
+  <section class="bg-surface py-20 lg:py-24">
     <div class="container-x max-w-3xl">
-      <h1 class="h1-hero text-white">Datenschutzerklärung</h1>
+      <h1 class="h1-hero text-ink-950">Datenschutzerklärung</h1>
 
       <!-- TODO Dzemo: Diese Datenschutzerklärung muss vor Go-Live von einem Rechtsanwalt oder anhand eines aktuellen DSGVO-Generators geprüft werden. Hier nur ein solider Standard-Text. -->
 
-      <div class="mt-10 space-y-8 text-white/80 text-base leading-relaxed">
+      <div class="mt-10 space-y-8 text-slate-text text-base leading-relaxed">
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">1. Verantwortlicher</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">1. Verantwortlicher</h2>
           <address class="not-italic">
             {site.legalName}<br/>
             {site.street}, {site.zip} {site.city}<br/>
-            E-Mail: <a href={`mailto:${site.email}`} class="text-emerald hover:underline">{site.email}</a><br/>
-            Telefon: <a href={`tel:${site.phoneE164}`} class="text-emerald hover:underline">{site.phone}</a>
+            E-Mail: <a href={`mailto:${site.email}`} class="text-emerald hover:underline font-medium">{site.email}</a><br/>
+            Telefon: <a href={`tel:${site.phoneE164}`} class="text-emerald hover:underline font-medium">{site.phone}</a>
           </address>
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">2. Allgemeines zur Datenverarbeitung</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">2. Allgemeines zur Datenverarbeitung</h2>
           <p>
             Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Website
             sowie unserer Inhalte und Leistungen erforderlich ist. Die Verarbeitung erfolgt regelmäßig nur nach Einwilligung des Nutzers
@@ -31,7 +31,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">3. Bereitstellung der Website und Erstellung von Logfiles</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">3. Bereitstellung der Website und Erstellung von Logfiles</h2>
           <p>
             Bei jedem Aufruf unserer Internetseite erfasst unser System automatisiert Daten und Informationen des Computersystems des aufrufenden Rechners.
             Folgende Daten werden hierbei erhoben: IP-Adresse, Datum und Uhrzeit des Zugriffs, Browsertyp und Version, verwendetes Betriebssystem,
@@ -40,7 +40,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">4. Kontaktaufnahme und Formulare</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">4. Kontaktaufnahme und Formulare</h2>
           <p>
             Wenn Sie uns per Formular, E-Mail, Telefon oder WhatsApp Anfragen zukommen lassen, werden Ihre Angaben inklusive der von Ihnen
             mitgeteilten Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
@@ -50,7 +50,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">5. Cookies und Consent Mode</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">5. Cookies und Consent Mode</h2>
           <p>
             Diese Website verwendet Cookies und Google Consent Mode v2. Beim ersten Besuch wird ein Cookie-Banner eingeblendet,
             über das Sie eine Einwilligung in Statistik- und Marketing-Cookies erteilen oder ablehnen können.
@@ -60,7 +60,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">6. Google Tag Manager / Google Analytics / Google Ads</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">6. Google Tag Manager / Google Analytics / Google Ads</h2>
           <p>
             Diese Website nutzt den Google Tag Manager, über den – nach Ihrer Einwilligung – Google Analytics und Google Ads-Conversion-Tracking eingebunden werden können.
             Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
@@ -70,7 +70,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">7. Netlify Forms</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">7. Netlify Forms</h2>
           <p>
             Formularanfragen werden über Netlify (Anbieter: Netlify Inc., 44 Montgomery St, San Francisco, CA 94104, USA) abgewickelt.
             Netlify verarbeitet die Daten in unserem Auftrag (Auftragsverarbeitung gem. Art. 28 DSGVO).
@@ -79,7 +79,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">8. Hosting</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">8. Hosting</h2>
           <p>
             Diese Website wird bei Netlify (Netlify Inc., 44 Montgomery St, San Francisco, CA 94104, USA) gehostet.
             Beim Besuch werden technisch notwendige Daten (z.B. IP-Adresse) an Netlify übermittelt.
@@ -87,7 +87,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">9. Ihre Rechte</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">9. Ihre Rechte</h2>
           <p>Sie haben das Recht auf:</p>
           <ul class="list-disc list-inside mt-2 space-y-1">
             <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -105,7 +105,7 @@ import { site } from '../data/site';
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold text-white mb-2">10. Aktualität der Datenschutzerklärung</h2>
+          <h2 class="text-lg font-semibold text-ink-950 mb-2">10. Aktualität der Datenschutzerklärung</h2>
           <p>
             Diese Datenschutzerklärung ist aktuell gültig. Aufgrund von Weiterentwicklung unserer Website
             oder geänderter gesetzlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern.

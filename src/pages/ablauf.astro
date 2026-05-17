@@ -36,32 +36,31 @@ const steps = [
   title={`So läuft es ab – ${site.name}`}
   description="In 5 Schritten zur sauberen Immobilie: Anfrage, Besichtigung, Angebot, Termin, Reinigung mit Qualitätskontrolle. Transparent und ohne Überraschungen."
 >
-  <section class="relative bg-ink-950 py-20 lg:py-28">
-    <div class="absolute inset-0 bg-hero-glow pointer-events-none" aria-hidden="true"></div>
+  <section class="relative bg-surface py-20 lg:py-28">
     <div class="container-x relative">
       <span class="badge-emerald">So läuft es ab</span>
-      <h1 class="mt-5 h1-hero text-white text-balance max-w-3xl">
+      <h1 class="mt-5 h1-hero text-ink-950 text-balance max-w-3xl">
         Vom ersten Klick bis zur <span class="text-emerald">sauberen Übergabe.</span>
       </h1>
-      <p class="mt-6 text-lg text-white/70 max-w-2xl">
+      <p class="mt-6 text-lg text-slate-text max-w-2xl">
         Wir machen den Ablauf so einfach wie möglich. Fünf Schritte – und Sie haben ein zuverlässiges Reinigungsteam an Ihrer Seite.
       </p>
     </div>
   </section>
 
-  <section class="bg-ink-900 py-20 lg:py-28">
+  <section class="bg-white py-20 lg:py-28">
     <div class="container-x">
       <div class="space-y-6">
         {steps.map((s) => (
-          <article class="group flex flex-col sm:flex-row gap-5 sm:gap-8 rounded-2xl bg-ink-950/50 p-7 ring-1 ring-white/5 transition hover:ring-emerald/30">
+          <article class="group flex flex-col sm:flex-row gap-5 sm:gap-8 rounded-2xl bg-surface p-7 ring-1 ring-slate-border transition hover:ring-emerald hover:shadow-card">
             <div class="flex-shrink-0">
-              <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald/15 text-emerald font-extrabold text-lg ring-1 ring-emerald/20">
+              <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-dark font-extrabold text-lg ring-1 ring-emerald-50">
                 {s.n}
               </div>
             </div>
             <div>
-              <h3 class="text-xl font-semibold text-white">{s.title}</h3>
-              <p class="mt-2 text-base text-white/60 leading-relaxed max-w-2xl">{s.body}</p>
+              <h3 class="text-xl font-semibold text-ink-950">{s.title}</h3>
+              <p class="mt-2 text-base text-slate-text leading-relaxed max-w-2xl">{s.body}</p>
             </div>
           </article>
         ))}

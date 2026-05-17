@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import { faq } from '../data/faq';
+import { site } from '../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={`Häufige Fragen (FAQ) – ${site.name}`}
+  description="Antworten auf die häufigsten Fragen zu unseren Reinigungsleistungen, Verträgen, Preisen, Versicherung und Einsatzorten."
+  schema={schema}
+>
+  <section class="relative bg-ink-950 py-20 lg:py-28">
+    <div class="absolute inset-0 bg-hero-glow pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative">
+      <span class="badge-emerald">FAQ</span>
+      <h1 class="mt-5 h1-hero text-white text-balance max-w-3xl">
+        Häufig gestellte <span class="text-emerald">Fragen.</span>
+      </h1>
+      <p class="mt-6 text-lg text-white/70 max-w-2xl">
+        Hier finden Sie Antworten auf die wichtigsten Fragen. Ihre Frage ist nicht dabei? Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-ink-900 py-20 lg:py-28">
+    <div class="container-x max-w-4xl">
+      <div class="space-y-3">
+        {faq.map((item, i) => (
+          <details class="group rounded-2xl bg-ink-950/50 ring-1 ring-white/5 transition open:ring-emerald/20" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4 p-6">
+              <h3 class="text-base sm:text-lg font-semibold text-white">{item.q}</h3>
+              <span class="flex-shrink-0 flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-white/70 transition group-open:rotate-45 group-open:bg-emerald group-open:text-white">
+                <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z" /></svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 -mt-1 text-sm text-white/70 leading-relaxed">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

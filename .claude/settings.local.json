@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sSL -o fassadenreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/IMG_1906.jpg\")",
+      "Bash(curl -sSL -o wintergartenreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/IMG_1292.jpg\")",
+      "Bash(curl -sSL -o hohe-fensterreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/IMG_1973.jpg\")",
+      "Bash(curl -sSL -o lamellenreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/IMG_1715.jpg\")",
+      "Bash(curl -sSL -o sonderreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/61585d9e-85f5-4af6-a963-d73ea6bbd835.jpg\")",
+      "Bash(curl -sSL -o bauendreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/image_7.jpg\")",
+      "Bash(curl -sSL -o kitareinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/kita-reinigung-berlin.jpg\")",
+      "Bash(curl -sSL -o kanzleireinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/kanzleireinigung1.jpg\")",
+      "Bash(curl -sSL -o treppenhausreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/Reinigung-des-Treppenhauses-mit-Wischmopp.webp\")",
+      "Bash(curl -sSL -o bueroreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/Bueroreinigung-Hannover-von-Fiduz-Schreibtisch-1200x800_jpeg.webp\")",
+      "Bash(npm install *)"
+    ]
+  }
+}

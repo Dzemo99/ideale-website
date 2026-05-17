@@ -1,0 +1,228 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import FloatingActions from '../components/FloatingActions.astro';
+import { site } from '../data/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: object | object[];
+  hideHeader?: boolean;
+  hideFooter?: boolean;
+}
+
+const {
+  title = `${site.name} — Professionelle Reinigung deutschlandweit | ${site.city}`,
+  description = `${site.name}: Schnelle, gründliche und faire Gebäudereinigung in ganz Deutschland. Büro, Praxis, Privat, Bauend- und Sonderreinigung. ${site.claim}.`,
+  canonical,
+  ogImage = '/images/og-default.jpg',
+  noindex = false,
+  schema,
+  hideHeader = false,
+  hideFooter = false,
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, site.url).toString();
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CleaningService',
+  '@id': `${site.url}#business`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  telephone: site.phoneE164,
+  email: site.email,
+  vatID: site.vat,
+  slogan: site.claim,
+  description: description,
+  image: `${site.url}${ogImage}`,
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.street,
+    postalCode: site.zip,
+    addressLocality: site.city,
+    addressCountry: site.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 51.5413,
+    longitude: 9.9158,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
+  ],
+  areaServed: [
+    { '@type': 'City', name: 'Göttingen' },
+    { '@type': 'City', name: 'Hannover' },
+    { '@type': 'City', name: 'Frankfurt am Main' },
+    { '@type': 'City', name: 'Kassel' },
+    { '@type': 'City', name: 'Dortmund' },
+    { '@type': 'City', name: 'Berlin' },
+    { '@type': 'City', name: 'Leipzig' },
+    { '@type': 'City', name: 'Köln' },
+    { '@type': 'City', name: 'Düsseldorf' },
+  ],
+  sameAs: [],
+};
+
+const schemas = schema
+  ? Array.isArray(schema)
+    ? [localBusinessSchema, ...schema]
+    : [localBusinessSchema, schema]
+  : [localBusinessSchema];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Consent Mode v2 — MUST run before GTM -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+
+      var stored = null;
+      try { stored = JSON.parse(localStorage.getItem('ig-consent') || 'null'); } catch (e) {}
+
+      var defaults = {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      };
+
+      if (stored && stored.granted) {
+        defaults.ad_storage = 'granted';
+        defaults.ad_user_data = 'granted';
+        defaults.ad_personalization = 'granted';
+        defaults.analytics_storage = 'granted';
+      }
+      gtag('consent', 'default', defaults);
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-MQWKFKRP');
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, site.url).toString()} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, site.url).toString()} />
+
+    <link rel="alternate" hreflang="de" href={site.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- GTM noscript -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MQWKFKRP"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="gtm"
+      ></iframe>
+    </noscript>
+
+    {!hideHeader && <Header />}
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    {!hideFooter && <Footer />}
+
+    <FloatingActions />
+    <CookieBanner />
+
+    <script is:inline>
+      // Scroll depth tracking — fires 25, 50, 75, 100
+      (function () {
+        var marks = [25, 50, 75, 100];
+        var fired = {};
+        function depth() {
+          var h = document.documentElement;
+          var b = document.body;
+          var st = h.scrollTop || b.scrollTop;
+          var sh = h.scrollHeight || b.scrollHeight;
+          var ch = h.clientHeight;
+          return Math.round(((st + ch) / sh) * 100);
+        }
+        var ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            var d = depth();
+            marks.forEach(function (m) {
+              if (d >= m && !fired[m]) {
+                fired[m] = true;
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'scroll_depth', depth: m });
+              }
+            });
+            ticking = false;
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

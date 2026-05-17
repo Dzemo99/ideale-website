@@ -1,0 +1,38 @@
+---
+import { site } from '../data/site';
+const waMsg = encodeURIComponent('Hallo, ich interessiere mich für eine Reinigung. Können Sie mir ein Angebot machen?');
+---
+
+<div class="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-3 print:hidden">
+  <a
+    href={`tel:${site.phoneE164}`}
+    class="group inline-flex h-12 items-center gap-2.5 rounded-full bg-ink-900/95 px-4 ring-1 ring-white/10 shadow-2xl backdrop-blur transition hover:bg-ink-800 hover:-translate-y-0.5"
+    aria-label="Jetzt anrufen"
+    data-track="floating-phone"
+  >
+    <span class="flex h-7 w-7 items-center justify-center rounded-full bg-emerald">
+      <svg class="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a1 1 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+    </span>
+    <span class="text-xs font-semibold text-white pr-1 hidden sm:inline">{site.phone}</span>
+  </a>
+
+  <a
+    href={`https://wa.me/${site.whatsappE164.replace('+', '')}?text=${waMsg}`}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-2xl shadow-[#25D366]/30 ring-2 ring-white/10 transition hover:-translate-y-0.5"
+    aria-label="WhatsApp Chat starten"
+    id="floating-wa"
+  >
+    <svg viewBox="0 0 32 32" fill="white" class="h-7 w-7">
+      <path d="M16 0C7.17 0 0 7.17 0 16c0 2.81.73 5.54 2.12 7.95L0 32l8.27-2.16A15.93 15.93 0 0016 32c8.83 0 16-7.17 16-16S24.83 0 16 0zm0 29.13c-2.5 0-4.94-.67-7.07-1.94l-.5-.3-4.9 1.28 1.3-4.79-.33-.51A12.99 12.99 0 013.13 16C3.13 8.9 8.9 3.13 16 3.13c7.1 0 12.87 5.77 12.87 12.87S23.1 29.13 16 29.13zm7.07-9.66c-.39-.2-2.3-1.13-2.65-1.26-.36-.13-.62-.2-.88.2-.26.39-1 1.26-1.23 1.52-.23.26-.45.29-.84.1-.39-.2-1.65-.61-3.15-1.94-1.16-1.03-1.95-2.31-2.18-2.7-.23-.39-.02-.6.17-.79.18-.18.39-.45.59-.68.2-.23.26-.39.39-.65.13-.26.06-.49-.03-.68-.1-.2-.88-2.13-1.21-2.91-.32-.77-.65-.66-.88-.67-.23-.01-.49-.01-.75-.01-.26 0-.68.1-1.04.49-.36.39-1.36 1.33-1.36 3.25 0 1.92 1.39 3.77 1.59 4.03.2.26 2.75 4.2 6.66 5.89.93.4 1.66.64 2.22.82.93.3 1.78.26 2.45.16.75-.11 2.3-.94 2.62-1.85.32-.91.32-1.68.23-1.85-.1-.17-.36-.27-.75-.46z"/>
+    </svg>
+  </a>
+</div>
+
+<script is:inline>
+  document.getElementById('floating-wa')?.addEventListener('click', function () {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'whatsapp_click', value: 40 });
+  });
+</script>

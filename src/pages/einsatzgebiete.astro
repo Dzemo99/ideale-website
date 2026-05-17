@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import { cities } from '../data/cities';
+import { site } from '../data/site';
+
+// Group cities by state
+const grouped: Record<string, typeof cities> = {};
+for (const c of cities) {
+  if (!grouped[c.state]) grouped[c.state] = [];
+  grouped[c.state]!.push(c);
+}
+const states = Object.keys(grouped).sort();
+---
+
+<BaseLayout
+  title={`Einsatzgebiete – Reinigung deutschlandweit | ${site.name}`}
+  description={`${site.name} ist deutschlandweit für Sie tätig: Hannover, Frankfurt, Göttingen, Kassel, Dortmund, Berlin, Leipzig, Köln, Düsseldorf und viele weitere Städte.`}
+>
+  <section class="relative bg-ink-950 py-20 lg:py-28">
+    <div class="absolute inset-0 bg-hero-glow pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative">
+      <span class="badge-emerald">Einsatzgebiete</span>
+      <h1 class="mt-5 h1-hero text-white text-balance max-w-3xl">
+        Wir sind <span class="text-emerald">deutschlandweit</span> für Sie da.
+      </h1>
+      <p class="mt-6 text-lg text-white/70 max-w-2xl">
+        Von Hannover bis Köln, von Berlin bis Frankfurt – {cities.length} Einsatzorte und stetig wachsend.
+        Sie finden Ihre Stadt nicht? Fragen Sie uns trotzdem an.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-ink-900 py-20 lg:py-28">
+    <div class="container-x">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {states.map((state) => (
+          <div class="card-dark p-7">
+            <h2 class="text-xs font-semibold uppercase tracking-wider text-emerald">{state}</h2>
+            <ul class="mt-4 space-y-1.5">
+              {grouped[state]!.map((c) => (
+                <li class="flex items-center gap-2 text-sm text-white/80">
+                  <span class="h-1 w-1 rounded-full bg-emerald"></span>
+                  {c.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-2xl bg-ink-950/50 p-6 ring-1 ring-white/5 text-center">
+        <p class="text-sm text-white/60">
+          Ihre Stadt ist nicht dabei? Wir prüfen jede Anfrage individuell – auch bundesländerübergreifend.
+        </p>
+        <a href="/kontakt" class="mt-4 btn-primary !py-2.5 !text-xs inline-flex">Anfrage stellen</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

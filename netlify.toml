@@ -1,0 +1,86 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# === 301-Redirects: Shopify → Neue Site ===
+
+[[redirects]]
+  from = "/pages/kontakt"
+  to = "/kontakt"
+  status = 301
+
+[[redirects]]
+  from = "/pages/reinigung-fur-privat-und-mehr"
+  to = "/privat"
+  status = 301
+
+[[redirects]]
+  from = "/pages/reinigung-fur-Gewerbe"
+  to = "/gewerbe"
+  status = 301
+
+[[redirects]]
+  from = "/pages/reinigung-fur-gewerbe"
+  to = "/gewerbe"
+  status = 301
+
+[[redirects]]
+  from = "/pages/ablauf"
+  to = "/ablauf"
+  status = 301
+
+[[redirects]]
+  from = "/pages/bewertung"
+  to = "/bewertungen"
+  status = 301
+
+[[redirects]]
+  from = "/pages/faq"
+  to = "/faq"
+  status = 301
+
+[[redirects]]
+  from = "/pages/fensterreinigung"
+  to = "/#services"
+  status = 301
+
+[[redirects]]
+  from = "/collections/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/products/*"
+  to = "/"
+  status = 301

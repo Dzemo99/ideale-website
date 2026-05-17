@@ -1,0 +1,16 @@
+---
+export interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<a href="/" class={`group inline-flex items-center gap-2.5 ${className}`} aria-label="Ideale Gebäudereinigung Startseite">
+  <span class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-emerald shadow-lg shadow-emerald/30 transition-transform group-hover:scale-105">
+    <span class="text-sm font-extrabold tracking-tight text-white">IG</span>
+  </span>
+  <span class="hidden sm:block leading-tight">
+    <span class="block text-[15px] font-bold tracking-tight text-white">Ideale</span>
+    <span class="block text-[10px] font-medium uppercase tracking-[0.18em] text-white/50">Gebäudereinigung</span>
+  </span>
+</a>

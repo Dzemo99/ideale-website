@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title={`Danke – ${site.name}`}
+  description="Vielen Dank für Ihre Anfrage. Wir melden uns innerhalb von 24 Stunden bei Ihnen."
+  noindex
+>
+  <section class="relative bg-ink-950 py-24 lg:py-32 min-h-[70vh] flex items-center">
+    <div class="absolute inset-0 bg-hero-glow pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-emerald/15 text-emerald ring-1 ring-emerald/30">
+          <svg class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h1 class="mt-8 h1-hero text-white text-balance">
+          Vielen Dank!
+        </h1>
+        <p class="mt-5 text-lg text-white/70 max-w-md mx-auto leading-relaxed">
+          Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.
+        </p>
+
+        <div class="mt-10 inline-flex flex-wrap justify-center gap-3">
+          <a href="/" class="btn-primary">Zur Startseite</a>
+          <a href={`tel:${site.phoneE164}`} class="btn-secondary">
+            <svg class="h-4 w-4 text-emerald" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a1 1 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+            {site.phone}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script slot="head" is:inline>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'form_submit_success', value: 80 });
+  </script>
+</BaseLayout>

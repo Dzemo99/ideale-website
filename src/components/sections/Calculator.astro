@@ -1,0 +1,124 @@
+---
+---
+
+<section id="kontakt-rechner" class="relative bg-ink-950 py-24 lg:py-32 scroll-mt-header">
+  <div class="absolute inset-0 bg-mesh-dark opacity-50 pointer-events-none" aria-hidden="true"></div>
+  <div class="container-x relative">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5">
+        <span class="badge-emerald">Anfrage-Rechner</span>
+        <h2 class="mt-5 h2-section text-white text-balance">
+          In 2 Minuten zum<br/>
+          <span class="text-emerald">unverbindlichen Angebot.</span>
+        </h2>
+        <p class="mt-5 text-lg text-white/60 max-w-md leading-relaxed">
+          Sagen Sie uns ein paar Eckdaten – wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.
+        </p>
+
+        <ul class="mt-8 space-y-3 text-sm text-white/70">
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald/15">
+              <svg class="h-3 w-3 text-emerald" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Kostenfrei und unverbindlich
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald/15">
+              <svg class="h-3 w-3 text-emerald" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Antwort innerhalb von 24 Stunden
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald/15">
+              <svg class="h-3 w-3 text-emerald" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Festpreis nach Objektbesichtigung
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-7">
+        <form
+          name="hauptseite-rechner"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/danke"
+          class="rounded-3xl bg-white/[0.04] backdrop-blur-xl ring-1 ring-white/10 p-6 sm:p-8 shadow-2xl"
+        >
+          <input type="hidden" name="form-name" value="hauptseite-rechner" />
+          <p class="hidden">
+            <label>Bot Feld: <input name="bot-field" /></label>
+          </p>
+
+          <fieldset>
+            <legend class="text-sm font-semibold text-white mb-4">Objekt</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="sm:col-span-2">
+                <label for="r-objekt" class="block text-xs font-medium text-white/60 mb-1.5">Objektname / Ort</label>
+                <input id="r-objekt" name="objekt" type="text" placeholder="z.B. Büro Hannover" class="input-dark" />
+              </div>
+              <div>
+                <label for="r-qm" class="block text-xs font-medium text-white/60 mb-1.5">Quadratmeter *</label>
+                <input id="r-qm" name="quadratmeter" type="number" min="1" required placeholder="z.B. 120" class="input-dark" />
+              </div>
+              <div>
+                <label for="r-intervall" class="block text-xs font-medium text-white/60 mb-1.5">Intervall *</label>
+                <select id="r-intervall" name="intervall" required class="input-dark">
+                  <option value="">Bitte wählen</option>
+                  <option value="einmalig">Einmalig</option>
+                  <option value="woechentlich">Wöchentlich</option>
+                  <option value="2x-woechentlich">2× wöchentlich</option>
+                  <option value="monatlich">Monatlich</option>
+                </select>
+              </div>
+              <div>
+                <label for="r-raeume" class="block text-xs font-medium text-white/60 mb-1.5">Räume (optional)</label>
+                <input id="r-raeume" name="raeume" type="number" min="0" placeholder="z.B. 5" class="input-dark" />
+              </div>
+              <div>
+                <label for="r-wc" class="block text-xs font-medium text-white/60 mb-1.5">WC / Sanitär (optional)</label>
+                <input id="r-wc" name="wc" type="number" min="0" placeholder="z.B. 2" class="input-dark" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="mt-7">
+            <legend class="text-sm font-semibold text-white mb-4">Kontakt</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="sm:col-span-2">
+                <input name="name" type="text" required placeholder="Ihr Name *" class="input-dark" autocomplete="name" aria-label="Name" />
+              </div>
+              <input name="phone" type="tel" required placeholder="Telefon *" class="input-dark" autocomplete="tel" aria-label="Telefon" />
+              <input name="email" type="email" required placeholder="E-Mail *" class="input-dark" autocomplete="email" aria-label="E-Mail" />
+              <div class="sm:col-span-2">
+                <textarea name="message" rows="3" placeholder="Anmerkungen (optional)" class="input-dark resize-none"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="mt-5 flex items-start gap-2">
+            <input id="r-consent" type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded accent-emerald" />
+            <label for="r-consent" class="text-xs text-white/60">
+              Ich stimme der Verarbeitung meiner Daten gemäß <a href="/datenschutz" class="text-emerald hover:underline">Datenschutz</a> zu.
+            </label>
+          </div>
+
+          <button type="submit" class="mt-6 btn-primary w-full" data-track="form-rechner">
+            Kostenloses Angebot anfordern
+            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.querySelectorAll('form[name="hauptseite-rechner"]').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'form_submit', form_name: 'hauptseite-rechner', value: 80 });
+    });
+  });
+</script>

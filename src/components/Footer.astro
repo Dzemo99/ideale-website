@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5 bg-ink-900">
+  <div class="container-x py-16">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-4">
+      <div class="lg:col-span-1">
+        <Logo />
+        <p class="mt-5 text-sm text-white/60 leading-relaxed max-w-xs">
+          {site.claim}. Professionelle Gebäudereinigung in {site.city} und deutschlandweit.
+        </p>
+        <p class="mt-4 text-xs text-white/40">
+          {site.insurance}
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Service</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="/#services" class="text-white/70 hover:text-emerald transition">Leistungen</a></li>
+          <li><a href="/kontakt" class="text-white/70 hover:text-emerald transition">Anfrage</a></li>
+          <li><a href="/einsatzgebiete" class="text-white/70 hover:text-emerald transition">Einsatzgebiete</a></li>
+          <li><a href="/bewertungen" class="text-white/70 hover:text-emerald transition">Referenzen</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Info</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="/privat" class="text-white/70 hover:text-emerald transition">Privat</a></li>
+          <li><a href="/gewerbe" class="text-white/70 hover:text-emerald transition">Gewerbe</a></li>
+          <li><a href="/ablauf" class="text-white/70 hover:text-emerald transition">Ablauf</a></li>
+          <li><a href="/faq" class="text-white/70 hover:text-emerald transition">FAQ</a></li>
+          <li><a href="/impressum" class="text-white/70 hover:text-emerald transition">Impressum</a></li>
+          <li><a href="/datenschutz" class="text-white/70 hover:text-emerald transition">Datenschutz</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-4">Kontakt</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li>
+            <a href={`mailto:${site.email}`} class="text-white/70 hover:text-emerald transition break-all">
+              {site.email}
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${site.phoneE164}`} class="text-white/70 hover:text-emerald transition">
+              {site.phone}
+            </a>
+          </li>
+          <li class="text-white/70">
+            {site.street}<br/>
+            {site.zip} {site.city}
+          </li>
+          <li class="mt-3">
+            <span class="badge-emerald">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald animate-pulse"></span>
+              24/7 erreichbar
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-white/40">
+        © {year} {site.legalName}. Alle Rechte vorbehalten.
+      </p>
+      <div class="flex items-center gap-5 text-xs">
+        <a href="/impressum" class="text-white/50 hover:text-white transition">Impressum</a>
+        <a href="/datenschutz" class="text-white/50 hover:text-white transition">Datenschutz</a>
+        <button type="button" id="open-cookie-settings" class="text-white/50 hover:text-white transition">
+          Cookie-Einstellungen
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>

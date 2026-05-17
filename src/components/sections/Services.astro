@@ -1,0 +1,23 @@
+---
+import { services } from '../../data/services';
+import ServiceCard from '../ServiceCard.astro';
+---
+
+<section id="services" class="bg-ink-900 py-24 lg:py-32 scroll-mt-header">
+  <div class="container-x">
+    <div class="max-w-3xl">
+      <span class="badge-emerald">17 Leistungen</span>
+      <h2 class="mt-5 h2-section text-white text-balance">
+        Umfangreiche Reinigungslösungen<br/>
+        für <span class="text-emerald">jeden Bedarf</span>.
+      </h2>
+      <p class="mt-5 text-lg text-white/60 max-w-2xl leading-relaxed">
+        Von der klassischen Büroreinigung bis zur Spezialreinigung in Reinräumen – wir bieten alle gängigen Leistungen aus einer Hand.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+    </div>
+  </div>
+</section>

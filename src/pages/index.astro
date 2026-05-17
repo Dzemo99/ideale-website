@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Services from '../components/sections/Services.astro';
+import WhyUs from '../components/sections/WhyUs.astro';
+import Calculator from '../components/sections/Calculator.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import { site } from '../data/site';
+import { faq } from '../data/faq';
+import { services } from '../data/services';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.slice(0, 6).map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: s.title,
+      description: s.short,
+      provider: { '@type': 'Organization', name: site.name },
+      areaServed: { '@type': 'Country', name: 'Deutschland' },
+    },
+  })),
+};
+
+const title = `${site.name} — Professionelle Reinigung deutschlandweit | ${site.city}`;
+const description = `Gebäudereinigung in ${site.city} und deutschlandweit: Büro-, Praxis-, Privat- und Sonderreinigung. ✓ Festpreise ✓ 24/7 erreichbar ✓ Versichert. ${site.claim}.`;
+---
+
+<BaseLayout title={title} description={description} schema={[faqSchema, serviceSchema]}>
+  <Hero />
+  <About />
+  <Services />
+  <WhyUs />
+  <Calculator />
+  <CtaBanner />
+</BaseLayout>

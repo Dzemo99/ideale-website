@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import { site } from '../data/site';
+
+const items = [
+  { title: 'Haushaltsreinigung', body: 'Regelmäßige Reinigung von Wohnung oder Haus – stundenweise oder im Paket.' },
+  { title: 'Fensterreinigung', body: 'Streifenfreie Fenster inklusive Rahmen und Fensterbänken.' },
+  { title: 'Grundreinigung', body: 'Intensive Tiefenreinigung nach Umzug oder zu besonderen Anlässen.' },
+  { title: 'Polster- und Teppichreinigung', body: 'Frische und gepflegte Polster, Teppiche und Matratzen.' },
+  { title: 'Sanitärreinigung', body: 'Bad und WC tiefenrein – mit Entkalkung und Desinfektion.' },
+  { title: 'Wintergarten- und Glasreinigung', body: 'Klare Sicht durch Glasdächer, Balkonverglasungen und Wintergärten.' },
+];
+---
+
+<BaseLayout
+  title={`Reinigung für Privat – ${site.name}`}
+  description="Private Reinigungsleistungen von Ideale Gebäudereinigung: Haushaltsreinigung, Fenster, Grundreinigung, Polster & mehr. Faire Festpreise, schnelle Terminvergabe."
+>
+  <section class="relative bg-ink-950 py-20 lg:py-28">
+    <div class="absolute inset-0 bg-hero-glow pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative">
+      <span class="badge-emerald">Für Privatkunden</span>
+      <h1 class="mt-5 h1-hero text-white text-balance max-w-3xl">
+        Sauberkeit zuhause – <span class="text-emerald">ohne Aufwand für Sie.</span>
+      </h1>
+      <p class="mt-6 text-lg text-white/70 max-w-2xl">
+        Ob regelmäßige Haushaltsreinigung, Frühjahrsputz oder Spezialreinigung – wir kümmern uns um Ihr Zuhause, damit Sie sich entspannen können.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/kontakt" class="btn-primary">Angebot anfragen</a>
+        <a href={`tel:${site.phoneE164}`} class="btn-secondary">{site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-900 py-20 lg:py-28">
+    <div class="container-x">
+      <h2 class="h2-section text-white text-balance max-w-2xl">Unsere Leistungen für Privatkunden</h2>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {items.map((i) => (
+          <div class="card-dark p-7">
+            <div class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald/15 text-emerald">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-white">{i.title}</h3>
+            <p class="mt-2 text-sm text-white/60 leading-relaxed">{i.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

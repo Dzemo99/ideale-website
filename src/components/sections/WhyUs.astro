@@ -18,28 +18,26 @@ const items = [
 ];
 ---
 
-<section class="py-24 lg:py-32">
+<section class="bg-white py-24 lg:py-32">
   <div class="container-x">
     <div class="max-w-3xl">
-      <span class="inline-flex items-center gap-2 rounded-full bg-emerald/10 px-3.5 py-1.5 text-xs font-medium text-emerald ring-1 ring-emerald/20">
-        Warum Ideale
-      </span>
-      <h2 class="mt-5 h2-section text-accent-blue text-balance">
+      <span class="badge-emerald">Warum Ideale</span>
+      <h2 class="mt-5 h2-section text-ink-950 text-balance">
         Drei Versprechen, die wir jeden Tag einlösen.
       </h2>
-      <p class="mt-5 text-lg text-matte-blue max-w-2xl leading-relaxed">
+      <p class="mt-5 text-lg text-slate-text max-w-2xl leading-relaxed">
         Sauberkeit ist Vertrauenssache. Wir verdienen uns Ihr Vertrauen durch Konsequenz.
       </p>
     </div>
 
     <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
       {items.map((item) => (
-        <article class="card-glass p-8">
-          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald/15 text-emerald">
+        <article class="card p-8">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-dark">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d={item.icon} /></svg>
           </div>
-          <h3 class="mt-5 text-lg font-semibold text-accent-blue">{item.title}</h3>
-          <p class="mt-2 text-sm text-matte-blue leading-relaxed">{item.body}</p>
+          <h3 class="mt-5 text-lg font-semibold text-ink-950">{item.title}</h3>
+          <p class="mt-2 text-sm text-slate-text leading-relaxed">{item.body}</p>
         </article>
       ))}
     </div>

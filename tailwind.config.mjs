@@ -9,6 +9,7 @@ export default {
           900: '#111113',
           800: '#1a1a1d',
           700: '#27272a',
+          blue: '#0f2744',
         },
         emerald: {
           DEFAULT: '#10b981',
@@ -21,6 +22,8 @@ export default {
         },
         muted: '#a1a1aa',
         surface: '#f9fafb',
+        'matte-blue': '#1e3a5f',
+        'surface-light': '#f8fafc',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

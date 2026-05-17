@@ -23,6 +23,7 @@ export default {
         muted: '#a1a1aa',
         surface: '#f9fafb',
         'matte-blue': '#1e3a5f',
+        'accent-blue': '#2d5a87',
         'surface-light': '#f8fafc',
       },
       fontFamily: {

@@ -15,28 +15,21 @@
   }
 
   body {
-    @apply text-accent-blue font-sans antialiased;
-    background: linear-gradient(180deg, #4a6a8c 0%, #6a8aac 50%, #8aaacc 100%) no-repeat;
-    background-attachment: fixed;
-    background-color: #4a6a8c;
+    @apply bg-surface text-slate-text font-sans antialiased;
     font-feature-settings: 'ss01', 'cv11';
   }
 
-  footer {
-    background-color: #0f2744 !important;
-  }
-
   ::selection {
-    background: rgba(16, 185, 129, 0.3);
-    color: #fff;
+    background: rgba(5, 150, 105, 0.18);
+    color: #0F172A;
   }
 
   h1, h2, h3, h4 {
-    @apply tracking-tight;
+    @apply tracking-tight text-ink-950;
   }
 
   :focus-visible {
-    outline: 2px solid #10b981;
+    outline: 2px solid #059669;
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -47,38 +40,54 @@
     @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
   }
 
+  /* Buttons */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-emerald;
   }
 
   .btn-primary {
-    @apply btn bg-emerald text-white hover:bg-emerald-dark hover:-translate-y-0.5 shadow-lg shadow-emerald/20;
+    @apply btn bg-emerald text-white hover:bg-emerald-light hover:-translate-y-0.5 shadow-lg shadow-emerald/20;
   }
 
+  /* Secondary on light surface: white bg, navy border, navy text */
   .btn-secondary {
-    @apply btn bg-white/5 text-white ring-1 ring-white/10 backdrop-blur hover:bg-white/10 hover:-translate-y-0.5;
+    @apply btn bg-white text-ink-950 ring-1 ring-slate-border hover:bg-surface hover:-translate-y-0.5;
   }
 
+  /* Dark CTA on light surface (e.g. "Sofort-Angebot" in hero) */
+  .btn-dark {
+    @apply btn bg-ink-950 text-white hover:bg-ink-950/90 hover:-translate-y-0.5 shadow-lg shadow-ink-950/10;
+  }
+
+  /* Kept for backwards-compat — light pill */
   .btn-light {
-    @apply btn bg-white text-ink-950 hover:bg-white/90 hover:-translate-y-0.5;
+    @apply btn bg-white text-ink-950 ring-1 ring-slate-border hover:-translate-y-0.5;
   }
 
+  /* Cards: clean white surface with subtle border and shadow */
+  .card {
+    @apply rounded-2xl bg-white ring-1 ring-slate-border shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card;
+  }
+
+  /* Backwards-compat aliases — all map to the new light card */
   .card-dark {
-    @apply rounded-2xl bg-ink-900 ring-1 ring-white/5 transition-all duration-300 hover:ring-emerald/30 hover:-translate-y-1;
+    @apply card;
   }
-
   .card-glass {
-    @apply rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:bg-white/15 hover:border-emerald/40 hover:-translate-y-1;
+    @apply card;
   }
 
-  .input-dark {
-    @apply w-full rounded-xl bg-white/5 px-4 py-3.5 text-white placeholder-white/40 ring-1 ring-white/10 transition focus:bg-white/10 focus:ring-emerald focus:outline-none;
-  }
-
+  /* Inputs */
   .input-light {
-    @apply w-full rounded-xl bg-white px-4 py-3.5 text-ink-950 placeholder-ink-700/40 ring-1 ring-ink-950/10 transition focus:bg-white focus:ring-emerald focus:outline-none;
+    @apply w-full rounded-xl bg-white px-4 py-3.5 text-ink-950 placeholder-slate-mute ring-1 ring-slate-border transition focus:bg-white focus:ring-2 focus:ring-emerald focus:outline-none;
   }
 
+  /* Backwards-compat alias */
+  .input-dark {
+    @apply input-light;
+  }
+
+  /* Headlines */
   .h1-hero {
     @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tightest leading-[1.05];
   }
@@ -87,30 +96,19 @@
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1];
   }
 
+  /* Badges */
   .badge {
-    @apply inline-flex items-center gap-2 rounded-full bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10;
+    @apply inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-slate-text ring-1 ring-slate-border;
   }
 
   .badge-emerald {
-    @apply inline-flex items-center gap-2 rounded-full bg-emerald/10 px-3.5 py-1.5 text-xs font-medium text-emerald ring-1 ring-emerald/20;
+    @apply inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-medium text-emerald-dark ring-1 ring-emerald-50;
   }
 
+  /* Text utilities — kept as semantic class for legacy markup */
   .text-muted {
-    @apply text-white/60;
+    @apply text-slate-mute;
   }
-
-  .light-section {
-    @apply bg-surface text-ink-950;
-  }
-
-  .light-section h1, .light-section h2, .light-section h3 {
-    @apply text-ink-950;
-  }
-
-  .light-section .text-muted {
-    @apply text-ink-700/70;
-  }
-
 }
 
 @layer utilities {

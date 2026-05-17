@@ -6,15 +6,15 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
       <div class="lg:col-span-5">
         <span class="badge-emerald">Anfrage-Rechner</span>
-        <h2 class="mt-5 h2-section text-ink-950 text-balance">
+        <h2 class="mt-5 h2-section text-accent-blue text-balance">
           In 2 Minuten zum<br/>
           <span class="text-accent-blue">unverbindlichen Angebot.</span>
         </h2>
-        <p class="mt-5 text-lg text-ink-950/70 max-w-md leading-relaxed">
+        <p class="mt-5 text-lg text-matte-blue max-w-md leading-relaxed">
           Sagen Sie uns ein paar Eckdaten – wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.
         </p>
 
-        <ul class="mt-8 space-y-3 text-sm text-ink-950/80">
+        <ul class="mt-8 space-y-3 text-sm text-matte-blue">
           <li class="flex items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-emerald/15">
               <svg class="h-3 w-3 text-emerald" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
@@ -43,7 +43,7 @@
           data-netlify="true"
           netlify-honeypot="bot-field"
           action="/danke"
-          class="rounded-3xl bg-white/85 backdrop-blur-xl ring-1 ring-ink-950/10 p-6 sm:p-8 shadow-xl"
+          class="rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20 p-6 sm:p-8 shadow-xl"
         >
           <input type="hidden" name="form-name" value="hauptseite-rechner" />
           <p class="hidden">
@@ -51,18 +51,18 @@
           </p>
 
           <fieldset>
-            <legend class="text-sm font-semibold text-ink-950 mb-4">Objekt</legend>
+            <legend class="text-sm font-semibold text-accent-blue mb-4">Objekt</legend>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="sm:col-span-2">
-                <label for="r-objekt" class="block text-xs font-medium text-ink-700 mb-1.5">Objektname / Ort</label>
+                <label for="r-objekt" class="block text-xs font-medium text-matte-blue mb-1.5">Objektname / Ort</label>
                 <input id="r-objekt" name="objekt" type="text" placeholder="z.B. Büro Hannover" class="input-light" />
               </div>
               <div>
-                <label for="r-qm" class="block text-xs font-medium text-ink-700 mb-1.5">Quadratmeter *</label>
+                <label for="r-qm" class="block text-xs font-medium text-matte-blue mb-1.5">Quadratmeter *</label>
                 <input id="r-qm" name="quadratmeter" type="number" min="1" required placeholder="z.B. 120" class="input-light" />
               </div>
               <div>
-                <label for="r-intervall" class="block text-xs font-medium text-ink-700 mb-1.5">Intervall *</label>
+                <label for="r-intervall" class="block text-xs font-medium text-matte-blue mb-1.5">Intervall *</label>
                 <select id="r-intervall" name="intervall" required class="input-light">
                   <option value="">Bitte wählen</option>
                   <option value="einmalig">Einmalig</option>
@@ -72,18 +72,18 @@
                 </select>
               </div>
               <div>
-                <label for="r-raeume" class="block text-xs font-medium text-ink-700 mb-1.5">Räume (optional)</label>
+                <label for="r-raeume" class="block text-xs font-medium text-matte-blue mb-1.5">Räume (optional)</label>
                 <input id="r-raeume" name="raeume" type="number" min="0" placeholder="z.B. 5" class="input-light" />
               </div>
               <div>
-                <label for="r-wc" class="block text-xs font-medium text-ink-700 mb-1.5">WC / Sanitär (optional)</label>
+                <label for="r-wc" class="block text-xs font-medium text-matte-blue mb-1.5">WC / Sanitär (optional)</label>
                 <input id="r-wc" name="wc" type="number" min="0" placeholder="z.B. 2" class="input-light" />
               </div>
             </div>
           </fieldset>
 
           <fieldset class="mt-7">
-            <legend class="text-sm font-semibold text-ink-950 mb-4">Kontakt</legend>
+            <legend class="text-sm font-semibold text-accent-blue mb-4">Kontakt</legend>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div class="sm:col-span-2">
                 <input name="name" type="text" required placeholder="Ihr Name *" class="input-light" autocomplete="name" aria-label="Name" />
@@ -98,7 +98,7 @@
 
           <div class="mt-5 flex items-start gap-2">
             <input id="r-consent" type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded accent-emerald" />
-            <label for="r-consent" class="text-xs text-ink-700">
+            <label for="r-consent" class="text-xs text-matte-blue">
               Ich stimme der Verarbeitung meiner Daten gemäß <a href="/datenschutz" class="text-emerald hover:underline">Datenschutz</a> zu.
             </label>
           </div>

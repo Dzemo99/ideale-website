@@ -6,15 +6,15 @@ import { site } from '../../data/site';
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.10),transparent_70%)] pointer-events-none" aria-hidden="true"></div>
   <div class="container-x relative">
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="h2-section text-ink-950 text-balance">
+      <h2 class="h2-section text-accent-blue text-balance">
         Bereit für eine <span class="text-accent-blue">Ideale Reinigung?</span>
       </h2>
-      <p class="mt-5 text-lg text-ink-950/70 max-w-2xl mx-auto">
+      <p class="mt-5 text-lg text-matte-blue max-w-2xl mx-auto">
         Schreiben Sie uns oder rufen Sie an – wir freuen uns auf Ihre Anfrage.
       </p>
       <div class="mt-9 flex flex-wrap justify-center gap-3">
         <a href="/kontakt" class="btn-primary">Angebot anfragen</a>
-        <a href={`tel:${site.phoneE164}`} class="btn bg-white text-ink-950 ring-1 ring-ink-950/10 hover:bg-white hover:-translate-y-0.5 shadow-md">
+        <a href={`tel:${site.phoneE164}`} class="btn bg-white/10 backdrop-blur-sm border border-emerald text-emerald hover:bg-emerald hover:text-white hover:-translate-y-0.5">
           <svg class="h-4 w-4 text-emerald" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a1 1 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
           {site.phone}
         </a>

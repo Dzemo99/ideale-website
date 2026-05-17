@@ -16,9 +16,9 @@
 
   body {
     @apply text-accent-blue font-sans antialiased;
-    background: linear-gradient(180deg, #5a7a9c 0%, #c0d2e2 100%) no-repeat;
+    background: linear-gradient(180deg, #4a6a8c 0%, #6a8aac 50%, #8aaacc 100%) no-repeat;
     background-attachment: fixed;
-    background-color: #5a7a9c;
+    background-color: #4a6a8c;
     font-feature-settings: 'ss01', 'cv11';
   }
 
@@ -65,6 +65,10 @@
 
   .card-dark {
     @apply rounded-2xl bg-ink-900 ring-1 ring-white/5 transition-all duration-300 hover:ring-emerald/30 hover:-translate-y-1;
+  }
+
+  .card-glass {
+    @apply rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:bg-white/15 hover:border-emerald/40 hover:-translate-y-1;
   }
 
   .input-dark {

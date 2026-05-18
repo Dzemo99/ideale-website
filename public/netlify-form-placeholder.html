@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Form Placeholder</title>
+</head>
+<body>
+  <p>
+    Netlify Form Detection Placeholder. Diese Datei dient ausschliesslich
+    dazu, dass Netlify die Forms beim Deploy zuverlaessig erkennt.
+  </p>
+
+  <!-- hauptseite-rechner (Anfrage-Rechner auf der Startseite) -->
+  <form name="hauptseite-rechner" netlify netlify-honeypot="bot-field" action="/danke/">
+    <input type="text" name="firma" />
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="date" name="wunschtermin" />
+    <input type="hidden" name="service" />
+    <input type="hidden" name="menge" />
+    <input type="hidden" name="preis_richtwert" />
+    <input type="checkbox" name="consent" />
+  </form>
+
+  <!-- hauptseite-quick (Hero Schnellanfrage) -->
+  <form name="hauptseite-quick" netlify netlify-honeypot="bot-field" action="/danke/">
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <textarea name="message"></textarea>
+    <input type="checkbox" name="consent" />
+  </form>
+
+  <!-- hauptseite-kontakt (Kontaktseite) -->
+  <form name="hauptseite-kontakt" netlify netlify-honeypot="bot-field" action="/danke/">
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="firma" />
+    <textarea name="message"></textarea>
+    <input type="checkbox" name="consent" />
+  </form>
+</body>
+</html>

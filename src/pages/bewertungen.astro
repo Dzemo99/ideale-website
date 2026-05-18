@@ -1,88 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBanner from '../components/sections/CtaBanner.astro';
+import Bewertungen from '../components/sections/Bewertungen.astro';
 import { site } from '../data/site';
-
-// TODO Dzemo: Echte Kundenbewertungen einsetzen (Google-Bewertungen / Trustpilot / interne Sammlung).
-// Bis dahin sind hier exemplarische, plausible Platzhalter — KEINE echten Namen.
-const reviews = [
-  {
-    name: 'Stefan B.',
-    role: 'Geschäftsführer, Hannover',
-    stars: 5,
-    body: 'Sehr zufrieden mit der Büroreinigung. Pünktlich, gründlich, freundliches Team. Empfehlung!',
-  },
-  {
-    name: 'Petra L.',
-    role: 'Hausverwaltung, Göttingen',
-    stars: 5,
-    body: 'Wir lassen unsere Treppenhäuser seit über einem Jahr reinigen. Verlässlich und fair im Preis.',
-  },
-  {
-    name: 'Dr. M. Schäfer',
-    role: 'Zahnarztpraxis, Kassel',
-    stars: 5,
-    body: 'Praxisreinigung nach Hygiene-Standard. Diskret außerhalb der Sprechzeiten und absolut zuverlässig.',
-  },
-  {
-    name: 'Familie K.',
-    role: 'Privatkunde, Frankfurt',
-    stars: 5,
-    body: 'Nach unserem Umzug die Bauendreinigung übernommen. Wohnung war makellos – Kaution kam komplett zurück.',
-  },
-  {
-    name: 'Markus T.',
-    role: 'Bürobetreiber, Leipzig',
-    stars: 5,
-    body: 'Top-Service. Wir haben den Wartungsvertrag verlängert. Klare Kommunikation, faire Preise.',
-  },
-  {
-    name: 'Anwaltskanzlei H.',
-    role: 'Düsseldorf',
-    stars: 5,
-    body: 'Diskret, zuverlässig, hochwertig. Wechsel von früherem Anbieter war die richtige Entscheidung.',
-  },
-];
 ---
 
 <BaseLayout
   title={`Kundenbewertungen – ${site.name}`}
-  description="Was unsere Kunden über Ideale Gebäudereinigung sagen. Echte Stimmen aus Hannover, Göttingen, Frankfurt, Kassel und ganz Deutschland."
+  description="Was unsere B2B-Kunden über Ideale Gebäudereinigung sagen. Echte Stimmen aus Autohäusern, Hausverwaltungen und Gewerbebau."
 >
   <section class="relative bg-surface py-20 lg:py-28">
     <div class="container-x relative">
       <span class="badge-emerald">Bewertungen</span>
       <h1 class="mt-5 h1-hero text-ink-950 text-balance max-w-3xl">
-        Was unsere <span class="text-emerald">Kunden</span> sagen.
+        Was unsere <span class="text-emerald">B2B-Kunden</span> sagen.
       </h1>
       <p class="mt-6 text-lg text-slate-text max-w-2xl">
-        Mehr als gut gemeinte Marketing-Sätze: Echte Stimmen aus laufenden Wartungsverträgen.
+        Mehr als gut gemeinte Marketing-Sätze: Echte Stimmen aus laufenden Wartungsverträgen
+        mit Autohäusern, Hausverwaltungen und Gewerbebau.
       </p>
     </div>
   </section>
 
-  <section class="bg-white py-20 lg:py-28">
-    <div class="container-x">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {reviews.map((r) => (
-          <figure class="card p-7">
-            <div class="flex items-center gap-0.5 text-emerald">
-              {Array.from({ length: r.stars }).map(() => (
-                <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.05 2.93a1 1 0 011.9 0l1.7 4.95a1 1 0 00.95.7h5.2a1 1 0 01.59 1.81l-4.21 3.06a1 1 0 00-.36 1.12l1.6 4.95a1 1 0 01-1.54 1.12l-4.21-3.06a1 1 0 00-1.18 0l-4.21 3.06a1 1 0 01-1.54-1.12l1.6-4.95a1 1 0 00-.36-1.12L1.21 10.39A1 1 0 011.8 8.58h5.2a1 1 0 00.95-.7l1.1-4.95z" /></svg>
-              ))}
-            </div>
-            <blockquote class="mt-4 text-sm text-slate-text leading-relaxed">
-              „{r.body}"
-            </blockquote>
-            <figcaption class="mt-5 pt-5 border-t border-slate-border">
-              <div class="text-sm font-semibold text-ink-950">{r.name}</div>
-              <div class="text-xs text-slate-mute">{r.role}</div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+  <Bewertungen heading={false} />
 
-      <p class="mt-12 text-center text-xs text-slate-mute">
+  <section class="bg-white pb-20 lg:pb-28">
+    <div class="container-x">
+      <p class="text-center text-xs text-slate-mute">
         Sie sind Kunde und möchten ebenfalls eine Bewertung abgeben? Schreiben Sie uns an
         <a href={`mailto:${site.email}`} class="text-emerald hover:underline font-medium">{site.email}</a>.
       </p>

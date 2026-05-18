@@ -30,9 +30,4 @@ const waMsg = encodeURIComponent('Hallo, ich interessiere mich für eine Reinigu
   </a>
 </div>
 
-<script is:inline>
-  document.getElementById('floating-wa')?.addEventListener('click', function () {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'whatsapp_click', value: 40 });
-  });
-</script>
+<!-- whatsapp_click + phone_click tracking handled globally in BaseLayout -->

@@ -28,14 +28,18 @@
         </p>
       </div>
 
-      <dl class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <dl class="grid grid-cols-1 sm:grid-cols-3 gap-5" data-stats-grid>
         <div class="card p-6">
-          <div class="text-3xl font-bold text-emerald">100%</div>
+          <div class="text-3xl font-bold text-emerald">
+            <span data-counter="100" data-suffix="%">0%</span>
+          </div>
           <dt class="mt-2 text-sm font-semibold text-ink-950">Qualitäts­kontrolle</dt>
           <dd class="mt-1 text-xs text-slate-mute">Jeder Auftrag wird abgenommen.</dd>
         </div>
         <div class="card p-6">
-          <div class="text-3xl font-bold text-emerald">24/7</div>
+          <div class="text-3xl font-bold text-emerald">
+            <span data-counter="24" data-suffix="/7">0/7</span>
+          </div>
           <dt class="mt-2 text-sm font-semibold text-ink-950">Verfügbarkeit</dt>
           <dd class="mt-1 text-xs text-slate-mute">Auch nachts und am Wochenende.</dd>
         </div>
@@ -48,3 +52,48 @@
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    const targets = document.querySelectorAll('[data-counter]');
+    if (!targets.length || !('IntersectionObserver' in window)) {
+      targets.forEach(function (el) {
+        const v = parseInt(el.getAttribute('data-counter') || '0', 10);
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        el.textContent = prefix + v + suffix;
+      });
+      return;
+    }
+
+    const animate = function (el) {
+      const target = parseInt(el.getAttribute('data-counter') || '0', 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1400;
+      const startTime = performance.now();
+
+      const step = function (now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(target * eased);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>

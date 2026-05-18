@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services, type Service } from '../../data/services';
+import { serviceContent, type ServiceContent, type PriceModel } from '../../data/service-content';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services
+    .filter((s) => serviceContent[s.slug])
+    .map((service) => ({
+      params: { slug: service.slug },
+      props: { service, content: serviceContent[service.slug] },
+    }));
+}
+
+interface Props {
+  service: Service;
+  content: ServiceContent;
+}
+
+const { service, content } = Astro.props;
+
+const categoryLabels: Record<Service['category'], string> = {
+  gewerbe: 'Für Gewerbe',
+  privat: 'Für Privat',
+  spezial: 'Spezialleistung',
+};
+
+const pageTitle = content.seoTitle
+  ? content.seoTitle
+  : `${service.title} – Festpreise & Leistungsumfang | ${site.name}`;
+
+const pageDescription = content.seoDescription
+  ? content.seoDescription
+  : `${service.title} von ${site.name}: ${content.lead.slice(0, 140)}…`;
+
+function priceHeadline(pricing: PriceModel): string {
+  if (pricing.type === 'inquiry') return 'Auf Anfrage';
+  return pricing.rateLabel;
+}
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: service.title,
+  description: content.lead,
+  provider: {
+    '@type': 'Organization',
+    name: site.name,
+    telephone: site.phoneE164,
+    url: site.url,
+  },
+  areaServed: { '@type': 'Country', name: 'Deutschland' },
+  ...(content.pricing.type !== 'inquiry'
+    ? {
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'EUR',
+          price: content.pricing.rate,
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: content.pricing.rate,
+            priceCurrency: 'EUR',
+            unitText: content.pricing.rateLabel,
+          },
+        },
+      }
+    : {}),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Leistungen', item: `${site.url}#services` },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: service.title,
+      item: `${site.url}services/${service.slug}/`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  schema={[serviceSchema, breadcrumbSchema]}
+>
+  <!-- Hero -->
+  <section class="relative bg-surface py-16 lg:py-24">
+    <div class="container-x relative">
+      <nav class="text-xs text-slate-mute mb-6" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap items-center gap-1.5">
+          <li><a href="/" class="hover:text-emerald transition">Start</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a href="/#services" class="hover:text-emerald transition">Leistungen</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-ink-950 font-medium" aria-current="page">{service.title}</li>
+        </ol>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div class="lg:col-span-7">
+          <span class="badge-emerald">{categoryLabels[service.category]}</span>
+          <h1 class="mt-5 h1-hero text-ink-950 text-balance">{service.title}</h1>
+          <p class="mt-6 text-lg text-slate-text leading-relaxed max-w-2xl">{content.lead}</p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/#kontakt-rechner" class="btn-primary">
+              Jetzt Richtwert berechnen
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </a>
+            <a href={`tel:${site.phoneE164}`} class="btn-secondary">{site.phone}</a>
+          </div>
+
+          <dl class="mt-10 inline-flex items-center gap-3 rounded-2xl bg-white ring-1 ring-slate-border px-5 py-3 shadow-soft">
+            <dt class="text-xs font-medium uppercase tracking-wider text-slate-mute">Tarif</dt>
+            <dd class="text-base font-bold text-ink-950">{priceHeadline(content.pricing)}</dd>
+          </dl>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="overflow-hidden rounded-3xl shadow-card ring-1 ring-slate-border">
+            <img
+              src={service.image}
+              alt={`${service.title} – Ideale Gebäudereinigung`}
+              width="800"
+              height="600"
+              loading="eager"
+              decoding="async"
+              class="block w-full h-auto aspect-[4/3] object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beschreibung + Leistungen -->
+  <section class="bg-white py-20 lg:py-28">
+    <div class="container-x">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-7">
+          <span class="badge-emerald">Was wir liefern</span>
+          <h2 class="mt-5 h2-section text-ink-950 text-balance">
+            Detaillierter <span class="text-emerald">Leistungsumfang</span>
+          </h2>
+
+          <div class="mt-8 space-y-5 text-slate-text leading-relaxed">
+            {content.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+
+        <aside class="lg:col-span-5">
+          <div class="rounded-2xl bg-surface ring-1 ring-slate-border p-7 lg:p-8">
+            <div class="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-dark">
+              Enthaltene Leistungen
+            </div>
+            <ul class="mt-5 space-y-3.5">
+              {content.leistungen.map((l) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-50">
+                    <svg class="h-3 w-3 text-emerald-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>
+                  </span>
+                  <span class="text-sm text-ink-950 leading-snug">{l}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-7 pt-6 border-t border-slate-border">
+              <div class="text-xs font-semibold uppercase tracking-[0.15em] text-slate-mute mb-2">Für wen</div>
+              <p class="text-sm text-slate-text leading-relaxed">{content.zielgruppe}</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preis-Transparenz -->
+  <section class="bg-surface py-20 lg:py-28">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="badge-emerald">Preis-Transparenz</span>
+        <h2 class="mt-5 h2-section text-ink-950 text-balance">
+          Was kostet <span class="text-emerald">{service.title}</span>?
+        </h2>
+      </div>
+
+      <div class="mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+        <div class="lg:col-span-3 rounded-3xl bg-ink-950 text-white p-8 lg:p-10 shadow-card relative overflow-hidden">
+          <div class="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-emerald/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+          <div class="relative">
+            {content.pricing.type === 'inquiry' ? (
+              <>
+                <div class="text-[11px] uppercase tracking-[0.15em] font-semibold text-slate-on-navy">Tarif</div>
+                <div class="mt-2 text-3xl lg:text-4xl font-bold">{content.pricing.rateLabel}</div>
+                <p class="mt-5 text-sm text-slate-on-navy leading-relaxed max-w-md">{content.pricing.reason}</p>
+              </>
+            ) : (
+              <>
+                <div class="text-[11px] uppercase tracking-[0.15em] font-semibold text-slate-on-navy">
+                  {content.pricing.type === 'hourly' ? 'Stundentarif' : content.pricing.type === 'floor' ? 'Pauschal pro Etage' : 'Pauschal pro m²'}
+                </div>
+                <div class="mt-2 text-4xl lg:text-5xl font-bold tabular-nums leading-none">{content.pricing.rateLabel}</div>
+                <p class="mt-4 text-sm text-slate-on-navy">Netto-Richtwert · zzgl. MwSt.</p>
+
+                <dl class="mt-6 pt-6 border-t border-white/10 space-y-3 text-sm">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <dt class="text-slate-on-navy">Beispielrechnung</dt>
+                    <dd class="text-right font-semibold text-white tabular-nums">{content.pricing.example}</dd>
+                  </div>
+                  {content.pricing.type === 'hourly' && (
+                    <div class="flex items-center justify-between">
+                      <dt class="text-slate-on-navy">Leistungsannahme</dt>
+                      <dd class="font-semibold text-white">ca. {content.pricing.productivity} m² / Std.</dd>
+                    </div>
+                  )}
+                </dl>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-5">
+          <div class="rounded-2xl bg-white ring-1 ring-slate-border p-6 lg:p-7">
+            <div class="flex items-start gap-3">
+              <svg class="mt-0.5 h-5 w-5 shrink-0 text-emerald-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4" />
+                <path d="M12 16h.01" />
+              </svg>
+              <div>
+                <div class="text-sm font-bold text-ink-950">Unverbindlicher Richtwert</div>
+                <p class="mt-1.5 text-xs leading-relaxed text-slate-text">
+                  Alle Preise verstehen sich als transparente Netto-Richtwerte zzgl. MwSt. Ein finales Festpreisangebot erfolgt nach einer kostenlosen Erstbesichtigung vor Ort.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/#kontakt-rechner"
+            class="rounded-2xl bg-emerald text-white p-6 lg:p-7 shadow-lg shadow-emerald/20 hover:bg-emerald-light hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-200 flex items-center justify-between group"
+          >
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-[0.15em] opacity-80">Schnellangebot</div>
+              <div class="mt-1 text-lg font-bold">Jetzt Preis berechnen</div>
+            </div>
+            <svg class="h-6 w-6 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vorteile -->
+  <section class="bg-white py-20 lg:py-28">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <span class="badge-emerald">Warum {site.shortName}</span>
+        <h2 class="mt-5 h2-section text-ink-950 text-balance">
+          Ihre <span class="text-emerald">Vorteile</span>
+        </h2>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+        {content.vorteile.map((v, i) => (
+          <article class="card p-7">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 ring-1 ring-emerald-50 text-emerald-dark font-bold">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <h3 class="mt-5 text-lg font-bold text-ink-950">{v.title}</h3>
+            <p class="mt-2 text-sm text-slate-text leading-relaxed">{v.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-surface py-20 lg:py-28">
+    <div class="container-x">
+      <div class="rounded-3xl bg-ink-950 text-white p-10 lg:p-16 relative overflow-hidden shadow-card">
+        <div class="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-emerald/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white ring-1 ring-white/15">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-light animate-pulse"></span>
+              Antwort innerhalb von 24 h
+            </span>
+            <h2 class="mt-5 text-3xl lg:text-4xl font-bold tracking-tight leading-tight text-balance">
+              Bereit für ein verbindliches Angebot für<br/>
+              <span class="text-emerald-light">{service.title}</span>?
+            </h2>
+            <p class="mt-4 text-base lg:text-lg text-slate-on-navy max-w-xl leading-relaxed">
+              Berechnen Sie Ihren unverbindlichen Richtwert direkt online – wir melden uns mit einem Festpreis nach kostenloser Erstbesichtigung.
+            </p>
+          </div>
+          <div class="lg:col-span-4 flex flex-col gap-3 lg:items-end">
+            <a href="/#kontakt-rechner" class="btn-primary w-full lg:w-auto">
+              Jetzt Richtwert berechnen
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </a>
+            <a
+              href={`tel:${site.phoneE164}`}
+              class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-white/20 hover:bg-white/5 transition w-full lg:w-auto"
+            >
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              {site.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

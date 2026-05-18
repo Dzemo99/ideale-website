@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
+import TrustBar from '../components/ui/TrustBar.astro';
 import HeroImage from '../components/sections/HeroImage.astro';
 import About from '../components/sections/About.astro';
 import Services from '../components/sections/Services.astro';
 import WhyUs from '../components/sections/WhyUs.astro';
+import Bewertungen from '../components/sections/Bewertungen.astro';
 import Calculator from '../components/sections/Calculator.astro';
 import CtaBanner from '../components/sections/CtaBanner.astro';
 import { site } from '../data/site';
@@ -44,9 +46,11 @@ const description = `Gebäudereinigung in ${site.city} und deutschlandweit: Bür
 <BaseLayout title={title} description={description} schema={[faqSchema, serviceSchema]}>
   <Hero />
   <HeroImage />
+  <TrustBar />
   <About />
   <Services />
   <WhyUs />
+  <Bewertungen />
   <Calculator />
   <CtaBanner />
 </BaseLayout>

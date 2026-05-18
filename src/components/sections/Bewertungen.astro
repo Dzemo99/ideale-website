@@ -1,0 +1,52 @@
+---
+import { reviews } from '../../data/reviews';
+
+interface Props {
+  heading?: boolean;
+}
+const { heading = true } = Astro.props;
+---
+
+<section class="bg-white py-20 lg:py-28 scroll-mt-header" id="bewertungen">
+  <div class="container-x">
+    {heading && (
+      <div class="max-w-3xl mb-12 lg:mb-16">
+        <span class="badge-emerald">Bewertungen</span>
+        <h2 class="mt-5 h2-section text-ink-950 text-balance">
+          Was unsere <span class="text-emerald">B2B-Kunden</span> sagen.
+        </h2>
+        <p class="mt-5 text-lg text-slate-text max-w-2xl">
+          Echte Stimmen aus laufenden Wartungsverträgen mit Autohäusern,
+          Hausverwaltungen und Gewerbebau.
+        </p>
+      </div>
+    )}
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
+      {reviews.map((r) => (
+        <figure class="relative flex flex-col rounded-2xl bg-[#121212] border border-neutral-800 p-7 lg:p-8 transition-all duration-300 hover:border-neutral-700 hover:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]">
+          <div class="flex items-center gap-1" aria-label={`${r.stars} von 5 Sternen`}>
+            {Array.from({ length: r.stars }).map(() => (
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="#C8A24B" aria-hidden="true">
+                <path d="M9.05 2.93a1 1 0 011.9 0l1.7 4.95a1 1 0 00.95.7h5.2a1 1 0 01.59 1.81l-4.21 3.06a1 1 0 00-.36 1.12l1.6 4.95a1 1 0 01-1.54 1.12l-4.21-3.06a1 1 0 00-1.18 0l-4.21 3.06a1 1 0 01-1.54-1.12l1.6-4.95a1 1 0 00-.36-1.12L1.21 10.39A1 1 0 011.8 8.58h5.2a1 1 0 00.95-.7l1.1-4.95z" />
+              </svg>
+            ))}
+          </div>
+
+          <svg class="mt-5 h-7 w-7 text-neutral-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.17 6A5.17 5.17 0 002 11.17V18h6.83v-6.83H5.5A1.67 1.67 0 017.17 9.5V6zm9 0a5.17 5.17 0 00-5.17 5.17V18h6.83v-6.83h-3.33A1.67 1.67 0 0116.17 9.5V6z" />
+          </svg>
+
+          <blockquote class="mt-3 flex-1 text-[15px] leading-relaxed text-neutral-300">
+            {r.body}
+          </blockquote>
+
+          <figcaption class="mt-6 pt-5 border-t border-neutral-800">
+            <div class="text-sm font-bold text-white">{r.name}</div>
+            <div class="mt-0.5 text-xs text-neutral-400">{r.role}</div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

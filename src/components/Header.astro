@@ -162,11 +162,6 @@ const navLinks = [
       });
     }
 
-    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'phone_click', value: 50 });
-      });
-    });
+    // phone_click tracking is handled globally via delegated listener in BaseLayout
   })();
 </script>

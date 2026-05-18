@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply bg-surface text-slate-mute font-sans antialiased;
+    @apply bg-surface text-slate-700 font-sans antialiased;
     font-feature-settings: 'ss01', 'cv11';
   }
 
@@ -98,7 +98,7 @@
 
   /* Badges */
   .badge {
-    @apply inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-slate-mute ring-1 ring-slate-border;
+    @apply inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-xs font-medium text-slate-700 ring-1 ring-slate-border;
   }
 
   .badge-emerald {
@@ -107,7 +107,7 @@
 
   /* Text utilities — kept as semantic class for legacy markup */
   .text-muted {
-    @apply text-slate-mute;
+    @apply text-slate-500;
   }
 }
 

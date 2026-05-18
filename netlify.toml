@@ -33,6 +33,18 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# === Form success rewrites — strict trailing slash for /danke ===
+
+[[redirects]]
+  from = "/danke"
+  to = "/danke/"
+  status = 200
+
+[[redirects]]
+  from = "/hauptseite-rechner-success"
+  to = "/danke/"
+  status = 200
+
 # === 301-Redirects: Shopify → Neue Site ===
 
 [[redirects]]

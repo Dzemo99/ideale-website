@@ -1,0 +1,33 @@
+---
+import { frankfurtFaq } from '../../data/frankfurt';
+---
+
+<section id="frankfurt-faq" class="bg-surface py-24 lg:py-32 scroll-mt-header">
+  <div class="container-x">
+    <div class="max-w-3xl">
+      <span class="badge-emerald">Häufige Fragen</span>
+      <h2 class="mt-5 h2-section text-ink-950 text-balance">
+        Antworten zur Reinigung in <span class="text-emerald">Frankfurt</span>.
+      </h2>
+      <p class="mt-5 text-lg text-slate-text max-w-2xl leading-relaxed">
+        Etwas Spezielles im Sinn? Rufen Sie uns an – wir antworten persönlich, ohne Hotline-Umweg.
+      </p>
+    </div>
+
+    <div class="mt-12 mx-auto max-w-3xl rounded-3xl bg-white ring-1 ring-slate-border shadow-soft divide-y divide-slate-border overflow-hidden">
+      {frankfurtFaq.map((item) => (
+        <details class="group">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 sm:px-8 transition hover:bg-surface">
+            <span class="text-base font-semibold text-ink-950">{item.q}</span>
+            <svg class="h-5 w-5 shrink-0 text-slate-mute transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 sm:px-8 -mt-1 text-sm leading-relaxed text-slate-text">
+            {item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

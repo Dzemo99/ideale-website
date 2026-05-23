@@ -1,0 +1,342 @@
+---
+type Mode = 'hourly' | 'flat' | 'inquiry';
+interface Cfg {
+  id: string;
+  label: string;
+  mode: Mode;
+  rate: number;
+  rateLabel: string;
+  unit?: string;
+  inputLabel?: string;
+  productivity?: number;
+  sliderMin?: number;
+  sliderMax?: number;
+  sliderStep?: number;
+  sliderDefault?: number;
+  quickValues?: number[];
+}
+
+const cfgs: Cfg[] = [
+  { id: 'buero', label: 'Büroreinigung', mode: 'hourly', rate: 29, rateLabel: '29,00 € / Std.', unit: 'm²', inputLabel: 'Bürofläche', productivity: 50, sliderMin: 30, sliderMax: 800, sliderStep: 10, sliderDefault: 150, quickValues: [50, 150, 300, 500] },
+  { id: 'praxis', label: 'Praxisreinigung', mode: 'hourly', rate: 42, rateLabel: '42,00 € / Std.', unit: 'm²', inputLabel: 'Praxisfläche', productivity: 50, sliderMin: 30, sliderMax: 500, sliderStep: 10, sliderDefault: 120, quickValues: [60, 120, 250, 400] },
+  { id: 'bauend', label: 'Bauendreinigung', mode: 'hourly', rate: 45, rateLabel: '45,00 € / Std.', unit: 'm²', inputLabel: 'Baufläche', productivity: 50, sliderMin: 30, sliderMax: 1000, sliderStep: 10, sliderDefault: 200, quickValues: [80, 200, 500, 800] },
+  { id: 'treppenhaus', label: 'Treppenhausreinigung', mode: 'flat', rate: 7, rateLabel: '7,00 € / Etage', unit: 'Etagen', inputLabel: 'Anzahl Etagen', sliderMin: 1, sliderMax: 15, sliderStep: 1, sliderDefault: 4, quickValues: [2, 4, 6, 10] },
+  { id: 'fenster', label: 'Glas- / Fensterreinigung', mode: 'flat', rate: 2.5, rateLabel: '2,50 € / m²', unit: 'm²', inputLabel: 'Fensterfläche', sliderMin: 5, sliderMax: 200, sliderStep: 1, sliderDefault: 25, quickValues: [10, 25, 50, 100] },
+  { id: 'fassade', label: 'Fassadenreinigung', mode: 'inquiry', rate: 0, rateLabel: 'Individuelles Angebot' },
+];
+
+const cfgById: Record<string, Cfg> = Object.fromEntries(cfgs.map((c) => [c.id, c]));
+const defaultId = cfgs[0].id;
+---
+
+<section id="frankfurt-rechner" class="bg-white py-24 lg:py-32 scroll-mt-header">
+  <div class="container-x">
+    <div class="max-w-3xl mb-12 lg:mb-16">
+      <span class="badge-emerald">Frankfurt-Rechner</span>
+      <h2 class="mt-5 h2-section text-ink-950 text-balance">
+        In 2 Minuten zum<br />
+        <span class="text-emerald">Festpreisangebot für Frankfurt.</span>
+      </h2>
+      <p class="mt-5 text-lg text-slate-text max-w-2xl leading-relaxed">
+        Wählen Sie Ihre Reinigungsart, justieren Sie den Umfang –
+        sehen Sie sofort eine transparente Richtwertangabe für Ihr Objekt im Rhein-Main-Raum.
+      </p>
+    </div>
+
+    <div class="rounded-3xl bg-white ring-1 ring-slate-border shadow-card overflow-hidden">
+      <div class="p-6 sm:p-8 border-b border-slate-border">
+        <label for="ffr-service" class="block text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-mute mb-2.5">
+          Reinigungsart wählen
+        </label>
+        <div class="relative">
+          <select id="ffr-service" data-service-select class="input-light !pr-12 text-base font-semibold cursor-pointer appearance-none bg-white">
+            {cfgs.map((c) => (
+              <option value={c.id} selected={c.id === defaultId}>
+                {c.label} {c.mode !== 'inquiry' ? `– ${c.rateLabel}` : '– auf Anfrage'}
+              </option>
+            ))}
+          </select>
+          <svg class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-mute" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m6 8 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+
+      <div data-mode="calc" class="grid grid-cols-1 lg:grid-cols-5">
+        <div class="lg:col-span-3 p-6 sm:p-10">
+          <div class="flex items-baseline justify-between gap-4">
+            <label for="ffr-amount" class="text-sm font-semibold text-ink-950" data-input-label>—</label>
+            <div class="text-3xl font-bold text-ink-950 tabular-nums leading-none">
+              <span data-display-value>0</span>
+              <span class="ml-1.5 text-base font-medium text-slate-mute" data-display-unit>—</span>
+            </div>
+          </div>
+
+          <input id="ffr-amount" type="range" data-slider class="calc-slider mt-5 w-full" min="1" max="100" step="1" value="50" aria-label="Umfang wählen" />
+
+          <div class="mt-2 flex justify-between text-[11px] font-medium text-slate-mute tabular-nums">
+            <span data-slider-min>—</span>
+            <span data-slider-max>—</span>
+          </div>
+
+          <div class="mt-7">
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-mute mb-2.5">Schnellauswahl</div>
+            <div data-quick-buttons class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-2 bg-surface border-t lg:border-t-0 lg:border-l border-slate-border p-6 sm:p-10">
+          <div class="rounded-2xl bg-ink-950 text-white p-6 lg:p-7 shadow-card relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-emerald/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+            <div class="relative">
+              <div class="text-[11px] uppercase tracking-[0.15em] font-semibold text-slate-on-navy">Netto-Richtwert</div>
+              <div class="mt-2 text-4xl lg:text-5xl font-bold tabular-nums leading-none"><span data-price>—</span></div>
+              <div class="mt-1.5 text-sm text-slate-on-navy" data-price-unit>pro Einsatz</div>
+
+              <dl class="mt-6 pt-6 border-t border-white/10 space-y-3 text-sm">
+                <div class="flex items-center justify-between">
+                  <dt class="text-slate-on-navy">Basis-Tarif</dt>
+                  <dd class="font-semibold text-white" data-rate>—</dd>
+                </div>
+                <div class="flex items-center justify-between" data-hours-row>
+                  <dt class="text-slate-on-navy">Geschätzte Dauer</dt>
+                  <dd class="font-semibold text-white tabular-nums" data-hours>—</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <p class="mt-5 text-xs leading-relaxed text-slate-mute">
+            <strong class="text-ink-950">Unverbindlicher Richtwert zzgl. MwSt.</strong>{' '}
+            Ein finales Festpreisangebot erfolgt nach einer kostenlosen Erstbesichtigung vor Ort in Frankfurt.
+          </p>
+        </aside>
+      </div>
+
+      <div data-mode="inquiry" class="hidden p-6 sm:p-10">
+        <div class="rounded-2xl bg-emerald-50 ring-1 ring-emerald-50 p-6 sm:p-8 flex items-start gap-4">
+          <div class="shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald text-white shadow-lg shadow-emerald/30">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-emerald-dark">Maßgeschneidertes Angebot</h3>
+            <p class="mt-2 text-sm leading-relaxed text-emerald-dark">
+              Für Fassadenreinigung erstellen wir nach Besichtigung ein individuelles Angebot.
+              Schildern Sie uns das Objekt – wir melden uns innerhalb von 24 Stunden.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form name="frankfurt-rechner" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/danke/" class="border-t border-slate-border p-6 sm:p-10">
+        <input type="hidden" name="form-name" value="frankfurt-rechner" />
+        <input type="hidden" name="source" value="rechner" />
+        <input type="hidden" name="objekt" data-output-name="objekt" value={cfgs[0].label} />
+        <input type="hidden" name="quadratmeter" data-output-name="quadratmeter" value="" />
+        <input type="hidden" name="intervall" data-output-name="intervall" value="einmalig" />
+        <input type="hidden" name="preis_richtwert" data-output-name="preis_richtwert" value="" />
+        <p class="hidden"><label>Bot Feld: <input name="bot-field" /></label></p>
+
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+          <div>
+            <h3 class="text-xl font-bold text-ink-950">Jetzt unverbindlich anfragen</h3>
+            <p class="mt-1 text-sm text-slate-mute">Antwort innerhalb von 24 Stunden mit Festpreis nach Besichtigung.</p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 self-start sm:self-end rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-dark ring-1 ring-emerald-50">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald animate-pulse"></span>
+            Frankfurt-Standort
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="sm:col-span-2">
+            <label for="ffr-name" class="block text-xs font-medium text-slate-mute mb-1.5">Name *</label>
+            <input id="ffr-name" name="name" type="text" required minlength="2" placeholder="Vor- und Nachname" class="input-light" autocomplete="name" />
+          </div>
+          <div>
+            <label for="ffr-email" class="block text-xs font-medium text-slate-mute mb-1.5">E-Mail *</label>
+            <input id="ffr-email" name="email" type="email" required placeholder="kontakt@firma.de" class="input-light" autocomplete="email" />
+          </div>
+          <div>
+            <label for="ffr-phone" class="block text-xs font-medium text-slate-mute mb-1.5">Telefon *</label>
+            <input id="ffr-phone" name="telefon" type="tel" required placeholder="069 12345678" class="input-light" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="mt-5 flex items-start gap-2">
+          <input id="ffr-consent" type="checkbox" name="datenschutz" required class="mt-1 h-4 w-4 rounded accent-emerald" />
+          <label for="ffr-consent" class="text-xs text-slate-mute">
+            Ich stimme der Verarbeitung meiner Daten gemäß <a href="/datenschutz" class="text-emerald hover:underline font-medium">Datenschutz</a> zu.
+          </label>
+        </div>
+
+        <button type="submit" class="mt-6 btn-primary w-full sm:w-auto" data-track="form-frankfurt-rechner">
+          Kostenloses Angebot anfordern
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: #E2E8F0;
+    outline: none;
+    cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #059669;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.35), 0 0 0 4px rgba(5, 150, 105, 0.12);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .calc-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.45), 0 0 0 5px rgba(5, 150, 105, 0.18);
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #059669;
+    border: none;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.35), 0 0 0 4px rgba(5, 150, 105, 0.12);
+    cursor: pointer;
+  }
+  .calc-slider:focus-visible { outline: none; }
+  .calc-slider:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.45), 0 0 0 5px rgba(5, 150, 105, 0.25);
+  }
+</style>
+
+<script is:inline define:vars={{ cfgById, defaultId }}>
+  (function () {
+    var CFG = cfgById;
+    var currentId = defaultId;
+    var root = document.getElementById('frankfurt-rechner');
+    if (!root) return;
+
+    var currencyFmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+    var select = root.querySelector('[data-service-select]');
+    var slider = root.querySelector('[data-slider]');
+    var displayValue = root.querySelector('[data-display-value]');
+    var displayUnit = root.querySelector('[data-display-unit]');
+    var inputLabel = root.querySelector('[data-input-label]');
+    var sliderMinEl = root.querySelector('[data-slider-min]');
+    var sliderMaxEl = root.querySelector('[data-slider-max]');
+    var quickWrap = root.querySelector('[data-quick-buttons]');
+    var priceEl = root.querySelector('[data-price]');
+    var priceUnitEl = root.querySelector('[data-price-unit]');
+    var rateEl = root.querySelector('[data-rate]');
+    var hoursRow = root.querySelector('[data-hours-row]');
+    var hoursEl = root.querySelector('[data-hours]');
+    var modeCalc = root.querySelector('[data-mode="calc"]');
+    var modeInquiry = root.querySelector('[data-mode="inquiry"]');
+
+    function setField(name, value) {
+      var el = root.querySelector('[data-output-name="' + name + '"]');
+      if (el) el.value = value;
+    }
+
+    function compute(c, value) {
+      if (c.mode === 'hourly') {
+        var hours = value / c.productivity;
+        return { price: hours * c.rate, hours: hours };
+      }
+      if (c.mode === 'flat') return { price: value * c.rate, hours: null };
+      return { price: 0, hours: null };
+    }
+
+    function renderQuickButtons(values, unit) {
+      quickWrap.innerHTML = '';
+      values.forEach(function (v) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rounded-xl px-3.5 py-2 text-sm font-semibold ring-1 ring-slate-border bg-white text-ink-950 hover:bg-surface hover:-translate-y-0.5 hover:ring-emerald/40 transition-all duration-200';
+        btn.textContent = v + ' ' + unit;
+        btn.addEventListener('click', function () {
+          slider.value = String(v);
+          renderCurrent();
+        });
+        quickWrap.appendChild(btn);
+      });
+    }
+
+    function applyCfg(c) {
+      if (c.mode === 'inquiry') {
+        modeCalc.classList.add('hidden');
+        modeInquiry.classList.remove('hidden');
+        setField('objekt', c.label);
+        setField('quadratmeter', '—');
+        setField('preis_richtwert', 'Auf Anfrage');
+        return;
+      }
+      modeCalc.classList.remove('hidden');
+      modeInquiry.classList.add('hidden');
+
+      slider.min = String(c.sliderMin);
+      slider.max = String(c.sliderMax);
+      slider.step = String(c.sliderStep);
+      slider.value = String(c.sliderDefault);
+
+      inputLabel.textContent = c.inputLabel;
+      displayUnit.textContent = c.unit;
+      sliderMinEl.textContent = c.sliderMin + ' ' + c.unit;
+      sliderMaxEl.textContent = c.sliderMax + ' ' + c.unit;
+      rateEl.textContent = c.rateLabel;
+      priceUnitEl.textContent = c.mode === 'hourly' ? 'pro Einsatz' : 'einmalig';
+
+      renderQuickButtons(c.quickValues, c.unit);
+    }
+
+    function renderCurrent() {
+      var c = CFG[currentId];
+      if (!c || c.mode === 'inquiry') return;
+      var value = parseFloat(slider.value);
+      displayValue.textContent = String(value);
+      var result = compute(c, value);
+      priceEl.textContent = currencyFmt.format(result.price);
+      if (result.hours !== null) {
+        hoursRow.classList.remove('hidden');
+        hoursEl.textContent = result.hours.toFixed(1).replace('.', ',') + ' Std.';
+      } else {
+        hoursRow.classList.add('hidden');
+      }
+      setField('objekt', c.label);
+      setField('quadratmeter', value + ' ' + c.unit);
+      setField('preis_richtwert', currencyFmt.format(result.price));
+    }
+
+    function switchCfg(id) {
+      if (!CFG[id]) return;
+      currentId = id;
+      applyCfg(CFG[id]);
+      renderCurrent();
+    }
+
+    select.addEventListener('change', function () { switchCfg(select.value); });
+    slider.addEventListener('input', renderCurrent);
+    switchCfg(currentId);
+
+    var form = root.querySelector('form[name="frankfurt-rechner"]');
+    if (form) {
+      form.addEventListener('submit', function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'form_submit', form_name: 'frankfurt-rechner', value: 80 });
+      });
+    }
+  })();
+</script>

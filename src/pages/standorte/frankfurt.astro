@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/frankfurt/Hero.astro';
+import Services from '../../components/frankfurt/Services.astro';
+import Rechner from '../../components/frankfurt/Rechner.astro';
+import WhyUs from '../../components/frankfurt/WhyUs.astro';
+import FAQ from '../../components/frankfurt/FAQ.astro';
+import ContactForm from '../../components/frankfurt/ContactForm.astro';
+import FinalCTA from '../../components/frankfurt/FinalCTA.astro';
+import { site } from '../../data/site';
+import { frankfurt, frankfurtServices, frankfurtFaq } from '../../data/frankfurt';
+
+const title = `Gebäudereinigung Frankfurt am Main | ${site.name}`;
+const description = `Professionelle Gebäudereinigung in Frankfurt am Main: Büro-, Glas-, Fassaden-, Bauend- und Praxisreinigung. Festpreise, 5 Mio. EUR versichert. ☎ ${site.phone}.`;
+const canonical = `${site.url}/standorte/frankfurt`;
+
+const frankfurtBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CleaningService',
+  '@id': `${site.url}/standorte/frankfurt#business`,
+  name: `${site.name} – Standort Frankfurt am Main`,
+  url: canonical,
+  telephone: site.phoneE164,
+  email: site.email,
+  vatID: site.vat,
+  priceRange: '€€',
+  description: description,
+  branchOf: { '@id': `${site.url}#business` },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.street,
+    postalCode: site.zip,
+    addressLocality: site.city,
+    addressCountry: site.country,
+  },
+  areaServed: frankfurt.serviceArea.map((name) => {
+    if (name === 'Rhein-Main-Gebiet') return { '@type': 'AdministrativeArea', name };
+    return { '@type': 'City', name };
+  }),
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:00',
+      closes: '18:00',
+    },
+  ],
+};
+
+const serviceSchemas = frankfurtServices.slice(0, 6).map((s) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: s.title,
+  name: `${s.title} in Frankfurt am Main`,
+  description: s.short,
+  provider: { '@id': `${canonical}#business` },
+  areaServed: { '@type': 'City', name: 'Frankfurt am Main' },
+}));
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: frankfurtFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Standorte', item: `${site.url}/standorte/frankfurt` },
+    { '@type': 'ListItem', position: 3, name: 'Frankfurt am Main', item: canonical },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schema={[frankfurtBusinessSchema, ...serviceSchemas, faqSchema, breadcrumbSchema]}
+>
+  <Hero />
+  <Services />
+  <Rechner />
+  <WhyUs />
+  <FAQ />
+  <ContactForm />
+  <FinalCTA />
+
+  <!-- Hidden Netlify form detection (build-time scan).
+       Stellt sicher, dass Netlify die Formularnamen erkennt, auch wenn die
+       sichtbaren Formulare per Astro-Komponenten dynamisch gerendert werden. -->
+  <form name="frankfurt-anfrage" data-netlify="true" data-netlify-honeypot="bot-field" hidden aria-hidden="true">
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="telefon" />
+    <input type="text" name="leistung" />
+    <input type="number" name="groesse" />
+    <input type="text" name="plz" />
+    <textarea name="nachricht"></textarea>
+    <input type="checkbox" name="datenschutz" />
+    <input type="text" name="source" />
+    <input type="text" name="bot-field" />
+  </form>
+  <form name="frankfurt-rechner" data-netlify="true" data-netlify-honeypot="bot-field" hidden aria-hidden="true">
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="telefon" />
+    <input type="text" name="objekt" />
+    <input type="text" name="quadratmeter" />
+    <input type="text" name="intervall" />
+    <input type="text" name="preis_richtwert" />
+    <input type="checkbox" name="datenschutz" />
+    <input type="text" name="source" />
+    <input type="text" name="bot-field" />
+  </form>
+</BaseLayout>

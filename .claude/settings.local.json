@@ -11,7 +11,27 @@
       "Bash(curl -sSL -o kanzleireinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/kanzleireinigung1.jpg\")",
       "Bash(curl -sSL -o treppenhausreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/Reinigung-des-Treppenhauses-mit-Wischmopp.webp\")",
       "Bash(curl -sSL -o bueroreinigung.jpg \"https://cdn.shopify.com/s/files/1/0836/2360/8663/files/Bueroreinigung-Hannover-von-Fiduz-Schreibtisch-1200x800_jpeg.webp\")",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "PowerShell(npm run *)",
+      "PowerShell(npm install *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "PowerShell(npm *)",
+      "Bash(git stash *)",
+      "Bash(npm config *)",
+      "Bash(npm run *)",
+      "Read(//c/Users/ACER/AppData/Local/Temp/claude/C--Users-ACER-Desktop-ideale-website/01c49b27-84f4-42c2-83d1-6aa991f5b9b9/tasks/**)",
+      "Bash(git reset *)",
+      "Bash(git branch *)",
+      "Bash(node *)",
+      "Bash(git remote *)",
+      "Bash(mkdir -p \"C:/Users/ACER/Desktop/ideale-website/public/frankfurt\")",
+      "Bash(cp \"C:/Users/ACER/Desktop/ideale-frankfurt/public/images/team-fassade.jpg\" \"C:/Users/ACER/Desktop/ideale-website/public/frankfurt/team-fassade.jpg\")",
+      "Bash(cp \"C:/Users/ACER/Desktop/ideale-frankfurt/public/images/team-glasreinigung.jpg\" \"C:/Users/ACER/Desktop/ideale-website/public/frankfurt/team-glasreinigung.jpg\")",
+      "Bash(cp \"C:/Users/ACER/Desktop/ideale-frankfurt/public/images/team-sanitaer.jpg\" \"C:/Users/ACER/Desktop/ideale-website/public/frankfurt/team-sanitaer.jpg\")"
     ]
   }
 }

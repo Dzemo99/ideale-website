@@ -1,0 +1,127 @@
+---
+import { site } from '../../data/site';
+import { frankfurt, FRANKFURT_FORM_SERVICES } from '../../data/frankfurt';
+---
+
+<section class="relative overflow-hidden isolate bg-surface">
+  <!-- Subtle radial emerald glow behind the form card -->
+  <div
+    class="absolute right-0 top-0 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(5,150,105,0.10),transparent_70%)] pointer-events-none -z-10"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container-x relative pt-16 pb-32 sm:pb-28 lg:pt-24 lg:pb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-12 items-start">
+      <div class="min-w-0 lg:col-span-7 lg:pr-8">
+        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 ring-1 ring-emerald-50 mb-6">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald animate-pulse"></span>
+          <span class="text-xs font-semibold text-emerald-dark">{frankfurt.eyebrow}</span>
+        </div>
+
+        <h1
+          lang="de"
+          class="text-[clamp(1.25rem,5.5vw,1.875rem)] sm:text-5xl lg:text-6xl font-bold tracking-normal sm:tracking-tightest leading-[1.1] sm:leading-[1.05] text-ink-950 text-balance"
+        >
+          {frankfurt.heroHeadline} —{' '}
+          <span class="text-emerald">{frankfurt.heroHighlight}</span>
+        </h1>
+
+        <p class="mt-6 text-lg text-slate-text max-w-xl leading-relaxed">
+          {frankfurt.heroLead}
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={`tel:${site.phoneE164}`} class="btn-dark" data-track="hero-phone-frankfurt">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.01.24l-2.2 2.2a15.05 15.05 0 01-6.59-6.59l2.2-2.21a1 1 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+            {site.phone}
+          </a>
+          <a href="#frankfurt-services" class="btn-secondary">Leistungen ansehen</a>
+        </div>
+
+        <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md">
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-wider text-slate-mute">Versichert</dt>
+            <dd class="mt-1 text-2xl font-bold text-ink-950">5 Mio.</dd>
+            <dd class="text-xs text-slate-mute">EUR Haftpflicht</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-wider text-slate-mute">Festpreis</dt>
+            <dd class="mt-1 text-2xl font-bold text-ink-950">100%</dd>
+            <dd class="text-xs text-slate-mute">transparent</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-medium uppercase tracking-wider text-slate-mute">Region</dt>
+            <dd class="mt-1 text-2xl font-bold text-ink-950">FFM</dd>
+            <dd class="text-xs text-slate-mute">Rhein-Main</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="min-w-0 lg:col-span-5 mt-12 lg:mt-0">
+        <form
+          name="frankfurt-anfrage"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/danke/"
+          class="relative rounded-3xl bg-white ring-1 ring-slate-border p-6 sm:p-8 shadow-card"
+        >
+          <input type="hidden" name="form-name" value="frankfurt-anfrage" />
+          <input type="hidden" name="source" value="hero" />
+          <p class="hidden">
+            <label>Bot Feld: <input name="bot-field" /></label>
+          </p>
+
+          <div class="absolute -top-3 -right-3 rounded-full bg-emerald px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
+            Frankfurt
+          </div>
+
+          <h2 class="text-xl font-bold text-ink-950">Kostenloses Angebot für Frankfurt</h2>
+          <p class="mt-1 text-sm text-slate-mute">Antwort innerhalb von 24 h.</p>
+
+          <div class="mt-5 space-y-3">
+            <div>
+              <label for="fh-name" class="sr-only">Name</label>
+              <input id="fh-name" type="text" name="name" required minlength="2" placeholder="Ihr Name *" class="input-light" autocomplete="name" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input type="email" name="email" required placeholder="E-Mail *" class="input-light" autocomplete="email" aria-label="E-Mail" />
+              <input type="tel" name="telefon" required placeholder="Telefon *" class="input-light" autocomplete="tel" aria-label="Telefon" />
+            </div>
+            <div>
+              <label for="fh-leistung" class="sr-only">Gewünschte Leistung</label>
+              <select id="fh-leistung" name="leistung" class="input-light !pr-10 cursor-pointer appearance-none bg-white">
+                <option value="">Gewünschte Leistung wählen…</option>
+                {FRANKFURT_FORM_SERVICES.map((s) => (
+                  <option value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label for="fh-msg" class="sr-only">Nachricht</label>
+              <textarea id="fh-msg" name="nachricht" rows="3" placeholder="Objekt kurz beschreiben (Adresse, Größe, Intervall)…" class="input-light resize-none"></textarea>
+            </div>
+            <div class="flex items-start gap-2">
+              <input id="fh-consent" type="checkbox" name="datenschutz" required class="mt-1 h-4 w-4 rounded accent-emerald" />
+              <label for="fh-consent" class="text-xs text-slate-mute">
+                Ich stimme der Verarbeitung meiner Daten gemäß <a href="/datenschutz" class="text-emerald hover:underline font-medium">Datenschutz</a> zu.
+              </label>
+            </div>
+            <button type="submit" class="btn-primary w-full" data-track="form-frankfurt-hero">
+              Frankfurt-Angebot anfragen
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.querySelectorAll('form[name="frankfurt-anfrage"]').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'form_submit', form_name: 'frankfurt-anfrage', value: 80 });
+    });
+  });
+</script>

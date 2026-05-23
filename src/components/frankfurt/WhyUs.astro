@@ -1,0 +1,45 @@
+---
+const items = [
+  {
+    title: 'Lokal verankert in Rhein-Main',
+    body: 'Wir bedienen Frankfurt, Offenbach, Mainz, Wiesbaden und Darmstadt. Kurze Wege, schnelle Vor-Ort-Termine, persönliche Ansprechpartner.',
+    icon: 'M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z',
+  },
+  {
+    title: 'Festpreise, 5 Mio. versichert',
+    body: 'Keine Stundenabrechnung, keine versteckten Aufschläge. Betriebshaftpflicht 5 Mio. EUR. Sie wissen vor Beginn, was Sie zahlen.',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Eigenes Team, keine Subs',
+    body: 'Wir arbeiten ausschließlich mit festangestellten Mitarbeitern. Konstante Qualität, klare Verantwortlichkeiten, faire Bezahlung.',
+    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+  },
+];
+---
+
+<section class="bg-white py-24 lg:py-32">
+  <div class="container-x">
+    <div class="max-w-3xl">
+      <span class="badge-emerald">Warum Ideale in Frankfurt</span>
+      <h2 class="mt-5 h2-section text-ink-950 text-balance">
+        Drei Gründe für uns als Reinigungspartner in Frankfurt.
+      </h2>
+      <p class="mt-5 text-lg text-slate-text max-w-2xl leading-relaxed">
+        Sauberkeit ist Vertrauenssache – gerade im Rhein-Main-Raum, wo Termine und Qualität zählen.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {items.map((item) => (
+        <article class="card p-8">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-dark">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d={item.icon} /></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-ink-950">{item.title}</h3>
+          <p class="mt-2 text-sm text-slate-text leading-relaxed">{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
